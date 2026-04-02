@@ -501,22 +501,28 @@ button{ cursor: pointer; font-family: inherit; border: none; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 /* ─── Responsive ───────────────────────────────────────────────── */
-@media (max-width: 1024px) {
+@media (max-width: 1060px) {
+  /* Nav collapses to hamburger on tablets too */
+  .nav-links, .nav-right { display: none; }
+  .hamburger { display: flex; }
+  .topbar-strip { display: none; }
+  /* Footer 2-col on tablets */
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .nav-links, .nav-right { display: none; }
-  .hamburger { display: flex; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .form-row { grid-template-columns: 1fr; }
   .section { padding: 72px 0; }
   .section-lg { padding: 90px 0; }
-  .page-hero { min-height: 320px; padding-bottom: 40px; }
-  .topbar-strip { display: none; }
+  /* page-hero: add padding-top so content clears fixed navbar */
+  .page-hero { min-height: 360px; padding-top: 80px; padding-bottom: 40px; }
 }
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
+  .section { padding: 56px 0; }
+  /* footer policies wrap */
+  .footer-policies { flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -779,7 +785,11 @@ button{ cursor: pointer; font-family: inherit; border: none; }
 .loyalty-card-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--white); flex-shrink: 0; }
 .loyalty-card-text .t { font-size: .88rem; font-weight: 600; color: var(--white); }
 .loyalty-card-text .s { font-size: .72rem; color: rgba(255,255,255,.6); margin-top: 2px; }
-@media (max-width: 768px) { .loyalty-inner { grid-template-columns: 1fr; } .loyalty-visual { display: none; } }
+@media (max-width: 768px) {
+  .loyalty-inner { grid-template-columns: 1fr; gap: 32px; }
+  .loyalty-visual { display: none; }
+  .loyalty-perks { grid-template-columns: 1fr; }
+}
 
 /* ─── Séminaires & Événements ──────────────────────────────────── */
 .seminar-grid {
@@ -797,7 +807,12 @@ button{ cursor: pointer; font-family: inherit; border: none; }
 .cap-item { background: rgba(255,255,255,.06); border-radius: 10px; padding: 16px; text-align: center; }
 .cap-item .n { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-l); line-height: 1; }
 .cap-item .l { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-top: 4px; }
-@media (max-width: 768px) { .seminar-grid { grid-template-columns: 1fr; } .seminar-img { height: 240px; } .seminar-body { padding: 32px 24px; } }
+@media (max-width: 768px) {
+  .seminar-grid { grid-template-columns: 1fr; }
+  .seminar-img { height: 260px; overflow: hidden; }
+  .seminar-img img { min-height: 0; height: 100%; width: 100%; object-fit: cover; }
+  .seminar-body { padding: 32px 24px; }
+}
 
 /* ─── Newsletter strip ─────────────────────────────────────────── */
 .newsletter-strip { background: var(--sand); border-top: 1px solid var(--border); padding: 52px 0; }

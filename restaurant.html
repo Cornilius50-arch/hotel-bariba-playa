@@ -93,6 +93,10 @@
       .resto-gallery img:first-child, .resto-gallery img:nth-child(2) { grid-column: auto; height: 200px; }
       .hours-grid { grid-template-columns: repeat(2,1fr); }
     }
+    @media (max-width:480px) {
+      .hours-grid { grid-template-columns: 1fr; }
+      .resto-gallery { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>

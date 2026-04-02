@@ -118,6 +118,7 @@
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 1024px) {
       .strip-grid { grid-template-columns: repeat(3,1fr); }
+      .rooms-grid { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width: 768px) {
       .about-grid, .resto-grid { grid-template-columns: 1fr; }
@@ -125,9 +126,23 @@
       .about-badge { display: none; }
       .rooms-grid, .reviews-grid { grid-template-columns: 1fr; }
       .strip-grid { grid-template-columns: repeat(2,1fr); }
+      /* booking bar stacks vertically */
       .booking-inner { flex-direction: column; }
-      .booking-cta { padding: 18px; }
+      .booking-field {
+        border-right: none;
+        border-bottom: 1px solid #f0e8de;
+      }
+      .booking-field:last-of-type { border-bottom: none; }
+      .booking-cta { padding: 18px; width: 100%; justify-content: center; }
       .hero-stats { display: none; }
+      /* hero slide: push content below navbar on mobile */
+      .hero-slide-content { padding-top: 80px; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .about-features { grid-template-columns: 1fr; }
+      .strip-grid { grid-template-columns: repeat(2,1fr); }
+      .rating-showcase { padding: 28px 20px; gap: 16px; }
+      .rating-divider { display: none; }
     }
   </style>
 </head>
