@@ -114,59 +114,64 @@ button{ cursor: pointer; font-family: inherit; border: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  padding: 18px 0;
-  transition: var(--transition);
+  background: #0f1f2e;
+  padding: 14px 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,.25);
+  transition: padding var(--transition), box-shadow var(--transition);
 }
 #navbar.scrolled {
-  background: rgba(10,31,46,.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 12px 0;
-  box-shadow: 0 4px 30px rgba(0,0,0,.2);
+  background: #0a1825;
+  padding: 10px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,.35);
 }
 #navbar.solid {
-  background: var(--navy);
+  background: #0f1f2e;
   padding: 14px 0;
-  box-shadow: 0 2px 20px rgba(0,0,0,.15);
 }
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
-.nav-logo { display: flex; flex-direction: column; line-height: 1; }
+.nav-logo { display: flex; flex-direction: column; line-height: 1; flex-shrink: 0; }
 .nav-logo .logo-main {
   font-family: 'Playfair Display', serif;
   font-size: 1.45rem;
   font-weight: 700;
   color: var(--white);
+  white-space: nowrap;
 }
 .nav-logo .logo-sub {
-  font-size: .62rem;
-  letter-spacing: .22em;
+  font-size: .6rem;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--gold-l);
-  margin-top: 2px;
+  margin-top: 3px;
+  white-space: nowrap;
 }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
 }
 .nav-links a {
-  font-size: .82rem;
+  font-size: .78rem;
   font-weight: 500;
-  letter-spacing: .07em;
+  letter-spacing: .09em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.82);
+  color: rgba(255,255,255,.8);
   position: relative;
   transition: color var(--transition);
   padding: 4px 0;
+  white-space: nowrap;
 }
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -2px; left: 0; right: 0;
+  bottom: -3px; left: 0; right: 0;
   height: 2px;
   background: var(--gold-l);
   transform: scaleX(0);
@@ -181,17 +186,19 @@ button{ cursor: pointer; font-family: inherit; border: none; }
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 .nav-tel {
   font-size: .78rem;
-  color: rgba(255,255,255,.7);
+  color: rgba(255,255,255,.75);
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   transition: color var(--transition);
 }
 .nav-tel:hover { color: var(--gold-l); }
-.nav-tel i { color: var(--gold); }
+.nav-tel i { color: var(--gold); flex-shrink: 0; }
 
 /* Hamburger */
 .hamburger {

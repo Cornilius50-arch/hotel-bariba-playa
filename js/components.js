@@ -211,11 +211,9 @@ function initComponents(activePage) {
   const backTop = document.getElementById('backTop');
 
   if (navbar) {
-    if (!isHero) navbar.classList.add('solid');
+    navbar.classList.add('solid');
     window.addEventListener('scroll', () => {
-      if (isHero) {
-        navbar.classList.toggle('scrolled', window.scrollY > 60);
-      }
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
       if (backTop) backTop.classList.toggle('visible', window.scrollY > 400);
     });
   }
