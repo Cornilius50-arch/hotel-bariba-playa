@@ -144,6 +144,40 @@
       .rating-showcase { padding: 28px 20px; gap: 16px; }
       .rating-divider { display: none; }
     }
+    /* ── Large screens / 4K ──────────────────────────────────── */
+    @media (min-width: 1600px) {
+      .about-grid { gap: 96px; }
+      .about-images { height: 600px; }
+      .about-img-main { height: 80%; }
+      .about-img-accent { height: 54%; }
+      .about-features { gap: 24px; }
+      .strip-grid { grid-template-columns: repeat(6,1fr); gap: 12px; }
+      .strip-item { padding: 32px 18px; }
+      .resto-grid { gap: 96px; }
+      .reviews-grid { gap: 32px; }
+      .rooms-grid { grid-template-columns: repeat(3,1fr); gap: 36px; }
+      .rating-showcase { padding: 56px; }
+      .rating-item .big { font-size: 3.4rem; }
+    }
+    @media (min-width: 2560px) {
+      .about-images { height: 780px; }
+      .about-badge { width: 136px; height: 136px; }
+      .about-badge .bn { font-size: 2.6rem; }
+      .strip-item i { font-size: 2rem; margin-bottom: 16px; }
+      .strip-item span { font-size: .9rem; }
+      .booking-field { padding: 28px 32px; }
+      .room-img { height: 290px; }
+      .review-card { padding: 36px; }
+      .rating-showcase { padding: 68px; gap: 48px; }
+    }
+    @media (min-width: 3840px) {
+      .about-images { height: 1100px; }
+      .room-img { height: 360px; }
+      .room-body h3 { font-size: 1.6rem; }
+      .strip-item { padding: 44px 24px; }
+      .rating-showcase { padding: 80px; }
+      .rating-divider { height: 80px; }
+    }
   </style>
 </head>
 <body>

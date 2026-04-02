@@ -840,3 +840,168 @@ button{ cursor: pointer; font-family: inherit; border: none; }
 .award-item:hover { opacity: 1; }
 .award-item i { font-size: 2rem; color: var(--gold); }
 .award-item span { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: center; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LARGE SCREEN & 4K ULTRA HD — Progressive scaling
+   Breakpoints: 1600px (wide desktop), 2560px (2K/QHD), 3840px (4K UHD)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Wide Desktop (1600px+) ───────────────────────────────────── */
+@media (min-width: 1600px) {
+  .container { max-width: 1480px; }
+
+  /* Navbar */
+  #navbar { padding: 18px 0; }
+  .nav-logo .logo-main { font-size: 1.65rem; }
+  .nav-logo .logo-sub  { font-size: .66rem; letter-spacing: .22em; }
+  .nav-links { gap: 36px; }
+  .nav-links a { font-size: .84rem; }
+  .nav-tel { font-size: .84rem; }
+
+  /* Sections */
+  .section    { padding: 120px 0; }
+  .section-lg { padding: 160px 0; }
+  .section-header { margin-bottom: 72px; }
+
+  /* Typography */
+  .section-title  { font-size: clamp(2.8rem, 3vw, 4rem); }
+  .section-subtitle { font-size: 1.08rem; }
+  .divider { width: 68px; height: 4px; margin-top: 22px; }
+
+  /* Footer */
+  #footer { padding: 100px 0 0; }
+  .footer-grid { gap: 64px; padding-bottom: 80px; }
+  .footer-brand .brand-name { font-size: 2.1rem; }
+  .footer-brand p { max-width: 340px; font-size: .9rem; }
+  .footer-col ul li a { font-size: .88rem; }
+  .footer-contact-item a,
+  .footer-contact-item span { font-size: .9rem; }
+
+  /* Buttons */
+  .btn { padding: 16px 38px; font-size: .92rem; }
+  .btn-sm { padding: 12px 26px; font-size: .86rem; }
+
+  /* Hero */
+  .hero-dot { width: 10px; height: 10px; }
+  .hero-dot.active { width: 34px; }
+  .hero-arrow { width: 60px; height: 60px; font-size: 1.1rem; }
+  .hero-arrow-prev { left: 40px; }
+  .hero-arrow-next { right: 40px; }
+
+  /* Awards */
+  .award-item i { font-size: 2.4rem; }
+  .award-item span { font-size: .74rem; }
+}
+
+/* ─── 2K / QHD (2560px+) ──────────────────────────────────────── */
+@media (min-width: 2560px) {
+  html { font-size: 19px; }
+  .container { max-width: 2000px; }
+
+  /* Navbar scales with rem */
+  #navbar { padding: 22px 0; }
+  .nav-links { gap: 44px; }
+
+  /* Sections */
+  .section    { padding: 140px 0; }
+  .section-lg { padding: 180px 0; }
+  .section-header { margin-bottom: 88px; }
+
+  /* Typography */
+  .section-label { font-size: .78rem; letter-spacing: .26em; }
+  .divider { width: 80px; }
+
+  /* Page hero */
+  .page-hero { min-height: 560px; padding-top: 120px; }
+  .page-hero h1 { font-size: clamp(3rem, 3vw, 5rem); }
+
+  /* Rooms overlay */
+  .room-overlay-img { height: 400px; }
+  .room-overlay-card:nth-child(1) .room-overlay-img { height: 802px; }
+  .room-overlay-name { font-size: 2.4rem; }
+
+  /* Tourisme cards */
+  .tourisme-card img { height: 340px; }
+
+  /* Seminar */
+  .seminar-img img { min-height: 560px; }
+  .seminar-body { padding: 72px 68px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 80px; }
+  .footer-brand p { max-width: 420px; }
+  .social-btn { width: 46px; height: 46px; font-size: 1rem; }
+
+  /* Newsletter */
+  .newsletter-form { flex: 0 0 520px; }
+  .newsletter-text h3 { font-size: 2rem; }
+
+  /* Floating CTA */
+  .float-btn { width: 58px; height: 58px; font-size: 1.2rem; }
+}
+
+/* ─── 4K UHD (3840px+) ────────────────────────────────────────── */
+@media (min-width: 3840px) {
+  html { font-size: 24px; }
+  .container { max-width: 2800px; }
+
+  /* Navbar */
+  #navbar { padding: 28px 0; }
+  .nav-logo .logo-main { font-size: 2rem; }
+  .nav-logo .logo-sub  { font-size: .72rem; letter-spacing: .26em; }
+  .nav-links { gap: 56px; }
+  .nav-links a { font-size: .9rem; letter-spacing: .1em; }
+  .nav-tel { font-size: .9rem; }
+  .nav-links a::after { height: 3px; }
+
+  /* Sections */
+  .section    { padding: 180px 0; }
+  .section-lg { padding: 240px 0; }
+  .section-header { margin-bottom: 110px; }
+
+  /* Page hero */
+  .page-hero { min-height: 700px; padding-top: 160px; }
+
+  /* Hero dots/arrows */
+  .hero-dots { bottom: 60px; gap: 14px; }
+  .hero-dot { width: 12px; height: 12px; }
+  .hero-dot.active { width: 44px; border-radius: 6px; }
+  .hero-arrow { width: 80px; height: 80px; font-size: 1.4rem; }
+  .hero-arrow-prev { left: 60px; }
+  .hero-arrow-next { right: 60px; }
+
+  /* Topbar */
+  .topbar-strip { padding: 12px 0; font-size: .82rem; }
+
+  /* Room cards */
+  .room-overlay-img { height: 500px; }
+  .room-overlay-card:nth-child(1) .room-overlay-img { height: 1002px; }
+  .room-overlay-name { font-size: 3rem; }
+  .room-overlay-actions .btn { padding: 14px 28px; }
+
+  /* Tourisme */
+  .tourisme-card img { height: 420px; }
+  .tourisme-card-info h4 { font-size: 2rem; }
+
+  /* Booking bar */
+  .booking-field { padding: 28px 32px; }
+
+  /* Social buttons */
+  .social-btn { width: 54px; height: 54px; border-radius: 12px; }
+
+  /* Floating CTA */
+  .float-btn { width: 68px; height: 68px; font-size: 1.4rem; border-radius: 16px; }
+
+  /* Awards strip */
+  .awards-inner { gap: 72px; }
+  .award-item i { font-size: 3rem; }
+  .award-item span { font-size: .82rem; }
+
+  /* Loyalty */
+  .loyalty-visual img { height: 560px; }
+  .perk { padding: 28px 24px; }
+  .perk i { font-size: 1.8rem; margin-bottom: 16px; }
+
+  /* Newsletter */
+  .newsletter-form { flex: 0 0 640px; }
+}
