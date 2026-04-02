@@ -2,8 +2,8 @@
 config/database.php
 setup.sql
 
-# Uploads (large binary files)
-uploads/
+# Keep uploads tracked for Netlify static deploy
+# uploads/
 
 # PHP sessions / cache
 *.log

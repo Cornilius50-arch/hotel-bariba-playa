@@ -192,34 +192,47 @@
     return item;
   }
 
-  // ── Load photos from API ───────────────────────────────────────────
+  // ── Static fallback (used on Netlify / no PHP server) ─────────────
+  const STATIC_PHOTOS = [
+    {id:1, filename:'facade-hotel.png',         title:"Façade de l'Hôtel Bariba Playa",      category:'hotel'},
+    {id:2, filename:'laplaya-nuit.png',          title:'La Playa — Lounge Bar Resto VIP',      category:'hotel'},
+    {id:3, filename:'chambre-orange.png',        title:'Chambre Double — Décoration Africaine', category:'chambres'},
+    {id:4, filename:'chambre-jaune.png',         title:'Chambre Supérieure avec Climatisation', category:'chambres'},
+    {id:5, filename:'chambre-bois.png',          title:'Chambre Standard — Lit en Bois',        category:'chambres'},
+    {id:6, filename:'salle-de-bain.png',         title:'Salle de Bain Moderne',                 category:'chambres'},
+    {id:7, filename:'chambre-lit-orange.png',    title:'Chambre Standard — Vue Lit',            category:'chambres'},
+    {id:8, filename:'salle-de-bain-moderne.png', title:'Salle de Bain Moderne',                 category:'chambres'},
+    {id:9, filename:'chambre-familiale.png',     title:'Chambre Familiale',                     category:'chambres'},
+    {id:10,filename:'chambre-suite-grise.png',   title:'Suite — Vue Voiliers',                  category:'chambres'},
+    {id:11,filename:'salle-de-bain-jaune.png',   title:'Salle de Bain Ensoleillée',             category:'chambres'},
+    {id:12,filename:'chambre-orange-luxe.png',   title:'Chambre Deluxe Orange',                 category:'chambres'},
+    {id:13,filename:'bar-laplaya-nuit.png',      title:'La Playa — Bar & Lounge VIP',           category:'services'},
+    {id:14,filename:'brochette-poulet.png',      title:'Brochette de Poulet & Riz',             category:'restaurant'},
+    {id:15,filename:'chambre-coin-bureau.png',   title:'Chambre — Coin Bureau',                 category:'chambres'},
+    {id:16,filename:'chambre-orange-detail.png', title:'Chambre Orange — Espace Dressing',      category:'chambres'},
+    {id:17,filename:'suite-voiliers.png',        title:'Suite Voiliers',                        category:'chambres'},
+    {id:18,filename:'suite-jaune.png',           title:'Suite Jaune & Grise',                   category:'chambres'},
+    {id:19,filename:'chambre-suite-moderne.png', title:'Suite Moderne — Grand Lit',             category:'chambres'},
+    {id:20,filename:'restaurant-promo.png',      title:'Menu Bar-Restaurant La Playa',          category:'restaurant'},
+  ];
+
+  // ── Load photos from API (falls back to static list) ──────────────
   async function loadGallery() {
     const grid = document.getElementById('gallery');
+    let photos = [];
     try {
       const res = await fetch('api/gallery.php');
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) throw new Error('no php');
       const json = await res.json();
-      const photos = json.data || [];
-
-      grid.innerHTML = '';
-
-      if (photos.length === 0) {
-        grid.innerHTML = '<div class="empty-state" style="column-span:all;"><i class="fa-regular fa-image" style="font-size:2.5rem;color:var(--gold);opacity:.5;"></i><p style="margin-top:12px;color:var(--muted);">Aucune photo disponible.</p></div>';
-        return;
-      }
-
-      galleryData = photos;
-      photos.forEach((photo, idx) => {
-        grid.appendChild(buildCard(photo, idx));
-      });
-
-
-      // Re-apply active filter
-      applyFilter(activeFilter);
-    } catch (err) {
-      console.error('Gallery load error:', err);
-      grid.innerHTML = '<div class="empty-state" style="column-span:all;"><i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#c0392b;"></i><p style="margin-top:12px;color:var(--muted);">Impossible de charger les photos.</p></div>';
+      photos = json.data || [];
+      if (!photos.length) throw new Error('empty');
+    } catch {
+      photos = STATIC_PHOTOS;
     }
+    grid.innerHTML = '';
+    galleryData = photos;
+    photos.forEach((photo, idx) => grid.appendChild(buildCard(photo, idx)));
+    applyFilter(activeFilter);
   }
 
   // ── Filter ─────────────────────────────────────────────────────────
