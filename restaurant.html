@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant — Hôtel Bariba Playa Cotonou</title>
+  <meta name="description" content="Le Restaurant Bariba — Cuisine africaine et internationale au cœur de Cotonou. Petit-déjeuner, déjeuner, dîner et brunch dominical." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .page-hero-bg { background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&q=85&auto=format'); }
+
+    /* Intro split */
+    .resto-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .resto-intro-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .resto-intro-imgs img { border-radius: var(--radius); object-fit: cover; width: 100%; }
+    .resto-intro-imgs img:first-child { grid-column: 1/3; height: 240px; }
+    .resto-intro-imgs img:not(:first-child) { height: 170px; }
+
+    /* Hours */
+    .hours-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .hour-card { background: var(--white); border-radius: var(--radius); padding: 28px 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,.06); border: 1px solid var(--border); transition: var(--transition); }
+    .hour-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .hour-card i { font-size: 1.8rem; color: var(--gold); display: block; margin-bottom: 14px; }
+    .hour-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+    .hour-card .time { font-size: 1.1rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+    .hour-card .days { font-size: .8rem; color: var(--muted); }
+
+    /* Menu tabs */
+    .menu-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+    .menu-tab {
+      padding: 10px 24px; border-radius: 50px; font-size: .84rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition); border: 2px solid var(--border);
+      color: var(--muted); background: var(--white);
+    }
+    .menu-tab.active, .menu-tab:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    .menu-section { display: none; }
+    .menu-section.active { display: block; }
+
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .menu-item {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 20px 24px; gap: 20px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      transition: background var(--transition);
+    }
+    .menu-item:hover { background: rgba(201,149,42,.04); }
+    .menu-item:nth-child(odd) { border-right: 1px solid rgba(0,0,0,.06); }
+    .menu-item-left { flex: 1; }
+    .menu-item-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .menu-item-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+    .menu-item-tags { display: flex; gap: 5px; margin-top: 7px; }
+    .mtag { font-size: .62rem; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 50px; }
+    .mtag-local  { background: rgba(201,149,42,.12); color: var(--gold); }
+    .mtag-vegan  { background: rgba(45,122,95,.1);   color: var(--green); }
+    .mtag-intl   { background: rgba(26,74,110,.08);  color: var(--blue); }
+    .mtag-gf     { background: rgba(180,60,60,.08);  color: #b43c3c; }
+    .menu-item-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); white-space: nowrap; }
+
+    /* Bar */
+    .bar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .bar-item { background: var(--navy); border-radius: var(--radius); padding: 28px 22px; text-align: center; }
+    .bar-item i { font-size: 1.6rem; color: var(--gold-l); display: block; margin-bottom: 12px; }
+    .bar-item h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); margin-bottom: 8px; }
+    .bar-item p { font-size: .82rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+    /* Gallery */
+    .resto-gallery { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: auto auto; gap: 12px; }
+    .resto-gallery img { width: 100%; object-fit: cover; border-radius: var(--radius); transition: transform .4s ease; cursor: pointer; }
+    .resto-gallery img:hover { transform: scale(1.03); }
+    .resto-gallery img:first-child { grid-column: 1/3; height: 260px; }
+    .resto-gallery img:nth-child(2) { grid-column: 3/5; height: 260px; }
+    .resto-gallery img:nth-child(n+3) { height: 190px; }
+
+    /* Ambiance strip */
+    .ambiance-strip { background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: var(--radius); padding: 40px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .ambiance-item { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 180px; }
+    .ambiance-item .ico { width: 48px; height: 48px; background: rgba(201,149,42,.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold-l); font-size: 1.1rem; flex-shrink: 0; }
+    .ambiance-item h5 { font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--white); margin-bottom: 3px; }
+    .ambiance-item p { font-size: .78rem; color: rgba(255,255,255,.55); }
+
+    @media (max-width:1024px) { .hours-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:768px) {
+      .resto-intro { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-item:nth-child(odd) { border-right: none; }
+      .bar-grid { grid-template-columns: 1fr; }
+      .resto-gallery { grid-template-columns: 1fr 1fr; }
+      .resto-gallery img:first-child, .resto-gallery img:nth-child(2) { grid-column: auto; height: 200px; }
+      .hours-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="current">Restaurant</span>
+      </div>
+      <h1>Le Restaurant <em>Bariba</em></h1>
+      <p>Un voyage culinaire entre Afrique et saveurs du monde, dans un cadre exceptionnel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Intro ─────────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="resto-intro">
+      <div class="reveal-left">
+        <span class="section-label">Notre Restaurant</span>
+        <h2 class="section-title">Gastronomie <em>Authentique</em></h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Au Bariba Playa, la table est une célébration. Notre chef exécutif, formé aux meilleures écoles de cuisine d'Afrique de l'Ouest, marie avec talent les saveurs béninoises et les techniques culinaires internationales.</p>
+        <p class="section-subtitle" style="margin-top:12px;">Chaque plat raconte une histoire — celle du Bénin, de ses marchés colorés, de ses pêcheurs de la lagune et de ses traditions culinaires ancestrales.</p>
+        <div style="display:flex; gap:20px; margin-top:28px; flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold);">50+</div>
+            <div style="font-size:.75rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase;">Plats au Menu</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold);">7j/7</div>
+            <div style="font-size:.75rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase;">Ouvert</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold);">3</div>
+            <div style="font-size:.75rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase;">Services / Jour</div>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:28px;">
+          <i class="fa-solid fa-calendar-days"></i> Réserver une Table
+        </a>
+      </div>
+      <div class="resto-intro-imgs reveal-right">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80&auto=format" alt="Salle du restaurant" />
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&auto=format" alt="Cuisine locale" />
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format" alt="Gastronomie" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Horaires ─────────────────────────────────────────────────── -->
+<section class="section-sm" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Horaires</span>
+      <h2 class="section-title reveal">Nos Services de <em>Table</em></h2>
+    </div>
+    <div class="hours-grid" style="margin-top:36px;">
+      <div class="hour-card reveal">
+        <i class="fa-solid fa-sun"></i>
+        <h4>Petit-Déjeuner</h4>
+        <div class="time">06h30 – 10h00</div>
+        <div class="days">Tous les jours</div>
+      </div>
+      <div class="hour-card reveal" style="transition-delay:.1s">
+        <i class="fa-solid fa-cloud-sun"></i>
+        <h4>Brunch Dominical</h4>
+        <div class="time">10h00 – 14h00</div>
+        <div class="days">Dimanches uniquement</div>
+      </div>
+      <div class="hour-card reveal" style="transition-delay:.2s">
+        <i class="fa-solid fa-utensils"></i>
+        <h4>Déjeuner</h4>
+        <div class="time">12h00 – 15h00</div>
+        <div class="days">Lun. – Dim.</div>
+      </div>
+      <div class="hour-card reveal" style="transition-delay:.3s">
+        <i class="fa-solid fa-moon"></i>
+        <h4>Dîner</h4>
+        <div class="time">19h00 – 23h00</div>
+        <div class="days">Tous les jours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Menu ──────────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Carte</span>
+      <h2 class="section-title reveal">Notre <em>Menu</em></h2>
+      <p class="section-subtitle reveal">Options végétariennes <span style="color:var(--green);">●</span>, vegan <span style="color:#4a9e4a;">●</span> et sans gluten <span style="color:#b43c3c;">GF</span> disponibles.</p>
+      <div class="divider reveal"></div>
+    </div>
+
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" onclick="showMenu('local')">Cuisine Locale</button>
+      <button class="menu-tab" onclick="showMenu('international')">Internationale</button>
+      <button class="menu-tab" onclick="showMenu('pdj')">Petit-Déjeuner</button>
+      <button class="menu-tab" onclick="showMenu('grillades')">Grillades &amp; BBQ</button>
+    </div>
+
+    <!-- Cuisine Locale -->
+    <div class="menu-section active" id="menu-local">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Amiwo au Poisson Braisé</div>
+            <div class="menu-item-desc">Pâte de maïs traditionnelle, sauce tomate épicée, poisson fumé de la lagune</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">3 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Aloko aux Crevettes Géantes</div>
+            <div class="menu-item-desc">Bananes plantains frites dorées, crevettes grillées au beurre d'ail, piment doux</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-vegan">Végé</span></div>
+          </div>
+          <div class="menu-item-price">4 200 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Akassa &amp; Sauce Gombo</div>
+            <div class="menu-item-desc">Pâte de maïs fermenté, sauce gombo traditionnelle, viande de bœuf ou poisson</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span></div>
+          </div>
+          <div class="menu-item-price">3 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Riz au Gras Djénon</div>
+            <div class="menu-item-desc">Riz jollof béninois, poulet fermier, légumes frais du marché</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">4 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Poisson Entier Grillé Lagune</div>
+            <div class="menu-item-desc">Poisson frais de pêche locale, marinade aux herbes et épices béninoises, frites</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">6 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Legume Béninois aux Ignames</div>
+            <div class="menu-item-desc">Ignames pilées, sauce légumes aux feuilles fraîches, option viande ou légumes</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-vegan">Vegan</span></div>
+          </div>
+          <div class="menu-item-price">3 200 FCFA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Internationale -->
+    <div class="menu-section" id="menu-international">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Entrecôte Grillée Sauce Poivre</div>
+            <div class="menu-item-desc">300g d'entrecôte importée, sauce au poivre vert, gratin dauphinois</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span></div>
+          </div>
+          <div class="menu-item-price">12 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Brochettes de Crevettes Méditerranéennes</div>
+            <div class="menu-item-desc">Grosses crevettes marinées, légumes grillés, riz pilaf au citron</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">9 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Poulet Rôti aux Herbes de Provence</div>
+            <div class="menu-item-desc">Demi-poulet rôti, herbes fraîches, pommes de terre sarladaises</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span></div>
+          </div>
+          <div class="menu-item-price">8 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Pâtes Carbonara Maison</div>
+            <div class="menu-item-desc">Tagliatelles fraîches maison, lardons fumés, parmesan affiné, jaune d'œuf</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span></div>
+          </div>
+          <div class="menu-item-price">6 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Salade César au Poulet Grillé</div>
+            <div class="menu-item-desc">Laitue romaine, poulet grillé, croûtons maison, parmesan, sauce césar</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span></div>
+          </div>
+          <div class="menu-item-price">5 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Buddha Bowl Végétarien</div>
+            <div class="menu-item-desc">Quinoa, avocat, légumes rôtis de saison, tahini, graines de courge</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span><span class="mtag mtag-vegan">Vegan</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">5 000 FCFA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Petit-déjeuner -->
+    <div class="menu-section" id="menu-pdj">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Buffet Continental</div>
+            <div class="menu-item-desc">Viennoiseries, fromages, charcuteries, fruits frais, jus, café ou thé</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">Buffet</span></div>
+          </div>
+          <div class="menu-item-price">4 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Petit-Déjeuner Africain</div>
+            <div class="menu-item-desc">Bouillie de mil ou de maïs, beignets locaux, lait caillé, pain maison</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span></div>
+          </div>
+          <div class="menu-item-price">2 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Œufs Bénédictine</div>
+            <div class="menu-item-desc">Œufs pochés, muffins anglais, jambon de pays, sauce hollandaise maison</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">International</span></div>
+          </div>
+          <div class="menu-item-price">5 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Brunch Signature Bariba</div>
+            <div class="menu-item-desc">Formule complète : buffet + plat chaud + boisson fraîche ou cocktail sans alcool</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Local</span><span class="mtag mtag-intl">Mixte</span></div>
+          </div>
+          <div class="menu-item-price">8 000 FCFA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grillades -->
+    <div class="menu-section" id="menu-grillades">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Plateau BBQ Complet</div>
+            <div class="menu-item-desc">Côtelettes agneau, ailerons de poulet, merguez, légumes grillés, sauces maison</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">BBQ</span></div>
+          </div>
+          <div class="menu-item-price">15 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Brochettes Mixtes Lagune</div>
+            <div class="menu-item-desc">Brochettes de poulet, bœuf et crevettes, marinades africaines, frites</div>
+            <div class="menu-item-tags"><span class="mtag mtag-local">Grillades</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">7 500 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Homard Grillé au Beurre Citron</div>
+            <div class="menu-item-desc">Homard entier grillé, beurre citronné, herbes fraîches, légumes de saison</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">Premium</span><span class="mtag mtag-gf">GF</span></div>
+          </div>
+          <div class="menu-item-price">25 000 FCFA</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-left">
+            <div class="menu-item-name">Côte de Bœuf pour Deux</div>
+            <div class="menu-item-desc">Côte de bœuf 600g, sauce béarnaise, pommes de terre au four, salade verte</div>
+            <div class="menu-item-tags"><span class="mtag mtag-intl">Premium</span></div>
+          </div>
+          <div class="menu-item-price">20 000 FCFA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Bar ───────────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--navy);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal" style="color:var(--gold-l);">Boissons</span>
+      <h2 class="section-title reveal" style="color:var(--white);">Le Bar <em style="color:var(--gold-l);">Bariba</em></h2>
+      <p class="section-subtitle reveal" style="color:rgba(255,255,255,.6); max-width:480px; margin:14px auto 0;">Cocktails tropicaux, vins sélectionnés, bières locales et artisanales, jus de fruits frais. Bar ouvert de 10h00 à minuit.</p>
+    </div>
+    <div class="bar-grid" style="margin-top:48px;">
+      <div class="bar-item reveal"><i class="fa-solid fa-martini-glass-citrus"></i><h4>Cocktails Tropicaux</h4><p>Créations originales aux saveurs béninoises, avec ou sans alcool. Notre signature : le "Lagune Sunset".</p></div>
+      <div class="bar-item reveal" style="transition-delay:.1s"><i class="fa-solid fa-wine-glass"></i><h4>Carte des Vins</h4><p>Sélection de vins rouges, blancs et rosés d'Afrique du Sud, France et Portugal.</p></div>
+      <div class="bar-item reveal" style="transition-delay:.2s"><i class="fa-solid fa-beer-mug-empty"></i><h4>Bières &amp; Apéritifs</h4><p>Bières locales béninoises, craft beer d'Afrique de l'Ouest, apéritifs traditionnels.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Galerie Restaurant ───────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Ambiance</span>
+      <h2 class="section-title reveal">Galerie du <em>Restaurant</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="resto-gallery" style="margin-top:48px;">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80&auto=format" alt="Salle restaurant" class="reveal" />
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format" alt="Gastronomie" class="reveal" />
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&auto=format" alt="Plat local" class="reveal" />
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80&auto=format" alt="Bar" class="reveal" />
+      <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80&auto=format" alt="Chef" class="reveal" />
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600&q=80&auto=format" alt="Dîner romantique" class="reveal" />
+    </div>
+  </div>
+</section>
+
+<!-- ─── Ambiance ─────────────────────────────────────────────────── -->
+<section class="section-sm" style="background:var(--cream);">
+  <div class="container">
+    <div class="ambiance-strip reveal">
+      <div class="ambiance-item">
+        <div class="ico"><i class="fa-solid fa-music"></i></div>
+        <div><h5>Musique Live</h5><p>Soirées musicales africaines les vendredis et samedis</p></div>
+      </div>
+      <div class="ambiance-item">
+        <div class="ico"><i class="fa-solid fa-fire-burner"></i></div>
+        <div><h5>Soirées BBQ</h5><p>Barbecues en plein air les mercredis en saison sèche</p></div>
+      </div>
+      <div class="ambiance-item">
+        <div class="ico"><i class="fa-solid fa-heart"></i></div>
+        <div><h5>Dîners Romantiques</h5><p>Mise en scène privée sur la terrasse avec vue lagune</p></div>
+      </div>
+      <div class="ambiance-item">
+        <div class="ico"><i class="fa-solid fa-users"></i></div>
+        <div><h5>Réceptions Privées</h5><p>Cocktails, anniversaires, cérémonies et séminaires</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────────────────────────── -->
+<section style="background:var(--navy); padding:80px 0; text-align:center;">
+  <div class="container">
+    <h2 class="reveal" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--white); margin-bottom:14px;">Réservez Votre Table</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.65); font-size:1rem; max-width:420px; margin:0 auto 32px; line-height:1.75;">Pour une occasion spéciale ou un dîner en tête-à-tête, nous préparons pour vous une expérience mémorable.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-calendar-days"></i> Réserver une Table</a>
+      <a href="tel:+22997856500" class="btn btn-outline-white"><i class="fa-solid fa-phone"></i> +229 97 85 65 00</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+<script src="js/components.js"></script>
+<script>
+  initComponents('restaurant');
+  function showMenu(id) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('menu-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

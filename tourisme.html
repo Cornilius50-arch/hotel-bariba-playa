@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tourisme &amp; Découverte — Hôtel Bariba Playa Cotonou</title>
+  <meta name="description" content="Explorez le Bénin depuis l'Hôtel Bariba Playa : Ganvié, Ouidah, plage de Fidjrossè, marché Dantokpa et bien plus. Nos concierges organisent vos excursions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .page-hero-bg { background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=85&auto=format'); }
+
+    /* Intro */
+    .tourisme-intro { max-width: 760px; margin: 0 auto; text-align: center; }
+    .tourisme-intro .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 300; font-style: italic;
+      color: var(--navy); line-height: 1.5; margin: 32px 0;
+    }
+
+    /* Attraction cards — full-width alternating */
+    .attraction {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; margin-bottom: 4px;
+      border-radius: 0; overflow: hidden;
+      min-height: 460px;
+    }
+    .attraction:nth-child(even) { direction: rtl; }
+    .attraction:nth-child(even) > * { direction: ltr; }
+    .attraction-img { position: relative; overflow: hidden; }
+    .attraction-img img {
+      width: 100%; height: 100%; min-height: 380px;
+      object-fit: cover; display: block;
+      transition: transform .7s ease;
+    }
+    .attraction:hover .attraction-img img { transform: scale(1.04); }
+    .attraction-body {
+      background: var(--cream); padding: 60px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .attraction-distance {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .attraction-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 18px;
+    }
+    .attraction-title em { font-style: italic; color: var(--gold); }
+    .attraction-desc { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .attraction-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .attraction-tag {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px;
+      background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(200,32,24,.2);
+    }
+    @media (max-width: 768px) {
+      .attraction, .attraction:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+      .attraction-img img { min-height: 260px; }
+      .attraction-body { padding: 36px 24px; }
+    }
+
+    /* Mini cards grid */
+    .mini-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .mini-card { border-radius: var(--radius); overflow: hidden; background: var(--white); box-shadow: var(--shadow); transition: var(--transition); }
+    .mini-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .mini-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .mini-card-body { padding: 20px; }
+    .mini-card-body h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+    .mini-card-body p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 768px) { .mini-cards { grid-template-columns: 1fr; } }
+
+    /* Concierge CTA */
+    .concierge-cta {
+      background: var(--navy); border-radius: var(--radius-lg);
+      padding: 60px 48px; text-align: center;
+      background-image: url('uploads/gallery/facade-hotel.png');
+      background-size: cover; background-position: center;
+      position: relative; overflow: hidden;
+    }
+    .concierge-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(26,11,6,.88);
+    }
+    .concierge-cta > * { position: relative; z-index: 2; }
+    .concierge-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+      color: var(--white); margin-bottom: 14px;
+    }
+    .concierge-cta h2 em { font-style: italic; color: var(--gold-l); }
+    .concierge-cta p { color: rgba(255,255,255,.7); max-width: 520px; margin: 0 auto 32px; line-height: 1.8; }
+    .concierge-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* Practical info */
+    .practical-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .practical-item { text-align: center; padding: 28px 16px; }
+    .practical-item i { font-size: 1.8rem; color: var(--gold); margin-bottom: 14px; display: block; }
+    .practical-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 6px; }
+    .practical-item p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 768px) { .practical-grid { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="current">Tourisme</span>
+      </div>
+      <h1>Explorez le <em>Bénin</em></h1>
+      <p>Depuis notre hôtel, partez à la découverte de la richesse culturelle, historique et naturelle du Bénin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Intro ──────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="tourisme-intro">
+      <span class="section-label reveal">Notre Engagement</span>
+      <p class="big-quote reveal">"Quelle que soit la raison de votre visite à Cotonou, notre objectif est de créer des expériences uniques qui forment des souvenirs durables."</p>
+      <p class="section-subtitle reveal">Notre équipe de concierge est à votre disposition pour organiser vos excursions, réserver vos transferts et vous guider vers les meilleures expériences du Bénin. Chaque itinéraire est conçu sur-mesure.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Principales Attractions ───────────────────────────────── -->
+<section style="background:var(--cream); padding:0;">
+
+  <div class="attraction reveal">
+    <div class="attraction-img">
+      <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=85&auto=format" alt="Ganvié — Village sur pilotis" loading="lazy" />
+    </div>
+    <div class="attraction-body">
+      <div class="attraction-distance"><i class="fa-solid fa-location-dot"></i> À 45 min de l'hôtel</div>
+      <h2 class="attraction-title">Ganvié —<br><em>La Venise de l'Afrique</em></h2>
+      <p class="attraction-desc">Unique au monde, Ganvié est un village lacustre entièrement construit sur pilotis au milieu du lac Nokoué. Plus de 20 000 habitants y vivent dans des maisons sur l'eau, accessibles uniquement en pirogue. Une expérience humaine et visuelle hors du commun.</p>
+      <div class="attraction-tags">
+        <span class="attraction-tag">Patrimoine UNESCO</span>
+        <span class="attraction-tag">Pirogue</span>
+        <span class="attraction-tag">Village lacustre</span>
+      </div>
+      <a href="https://wa.me/22997856500?text=Bonjour%2C%20je%20souhaite%20organiser%20une%20excursion%20à%20Ganvié." target="_blank" class="btn btn-primary">
+        <i class="fa-brands fa-whatsapp"></i> Organiser cette excursion
+      </a>
+    </div>
+  </div>
+
+  <div class="attraction reveal">
+    <div class="attraction-img">
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1200&q=85&auto=format" alt="Ouidah — Route des Esclaves" loading="lazy" />
+    </div>
+    <div class="attraction-body">
+      <div class="attraction-distance"><i class="fa-solid fa-location-dot"></i> À 40 min de l'hôtel</div>
+      <h2 class="attraction-title">Ouidah —<br><em>Mémoire &amp; Vodoun</em></h2>
+      <p class="attraction-desc">Ville chargée d'histoire, Ouidah est le cœur spirituel du Bénin. La Route des Esclaves, le Temple des Pythons, la Porte du Non-Retour et le musée historique retracent l'histoire fascinante de cette ville et de toute l'Afrique de l'Ouest.</p>
+      <div class="attraction-tags">
+        <span class="attraction-tag">Histoire</span>
+        <span class="attraction-tag">Vodoun</span>
+        <span class="attraction-tag">Architecture coloniale</span>
+      </div>
+      <a href="https://wa.me/22997856500?text=Bonjour%2C%20je%20souhaite%20visiter%20Ouidah." target="_blank" class="btn btn-primary">
+        <i class="fa-brands fa-whatsapp"></i> Organiser cette excursion
+      </a>
+    </div>
+  </div>
+
+  <div class="attraction reveal">
+    <div class="attraction-img">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=85&auto=format" alt="Plage de Fidjrossè" loading="lazy" />
+    </div>
+    <div class="attraction-body">
+      <div class="attraction-distance"><i class="fa-solid fa-location-dot"></i> À 13 min à pied</div>
+      <h2 class="attraction-title">Plage de <em>Fidjrossè</em></h2>
+      <p class="attraction-desc">À seulement 13 minutes à pied de l'hôtel, la plage de Fidjrossè offre des kilomètres de sable fin sur l'Atlantique. Idéale pour une promenade matinale, du surf ou simplement profiter du coucher de soleil face à l'océan.</p>
+      <div class="attraction-tags">
+        <span class="attraction-tag">Plage</span>
+        <span class="attraction-tag">Surf</span>
+        <span class="attraction-tag">Coucher de soleil</span>
+      </div>
+      <a href="contact.html" class="btn btn-primary">
+        <i class="fa-solid fa-map-location-dot"></i> Obtenir l'itinéraire
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── À Découvrir Aussi ──────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center" style="margin-bottom:48px;">
+      <span class="section-label reveal">Cotonou &amp; Environs</span>
+      <h2 class="section-title reveal">À Découvrir <em>Aussi</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="mini-cards">
+      <div class="mini-card reveal">
+        <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=700&q=80&auto=format" alt="Marché Dantokpa" loading="lazy" />
+        <div class="mini-card-body">
+          <h4>Marché Dantokpa</h4>
+          <p>Le plus grand marché en plein air d'Afrique de l'Ouest. Un labyrinthe coloré de tissus, épices, artisanat et culture vivante. À 15 min de l'hôtel.</p>
+        </div>
+      </div>
+      <div class="mini-card reveal" style="transition-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=700&q=80&auto=format" alt="Porto-Novo" loading="lazy" />
+        <div class="mini-card-body">
+          <h4>Porto-Novo</h4>
+          <p>La capitale du Bénin, avec son musée ethnographique, ses maisons brésiliennes et son ambiance paisible. Une excursion culturelle d'une journée.</p>
+        </div>
+      </div>
+      <div class="mini-card reveal" style="transition-delay:.2s">
+        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=700&q=80&auto=format" alt="Pendjari" loading="lazy" />
+        <div class="mini-card-body">
+          <h4>Parc de la Pendjari</h4>
+          <p>L'un des derniers refuges sauvages d'Afrique de l'Ouest — lions, éléphants, hippopotames. Un safari authentique à 500 km de Cotonou.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Concierge CTA ─────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="concierge-cta reveal">
+      <h2>Votre Itinéraire<br><em>Sur Mesure</em></h2>
+      <p>Notre équipe de concierge conçoit votre programme de visite en fonction de vos centres d'intérêt, de votre budget et de votre durée de séjour. Contactez-nous pour organiser chaque détail.</p>
+      <div class="concierge-btns">
+        <a href="https://wa.me/22997856500?text=Bonjour%2C%20je%20souhaite%20organiser%20un%20itinéraire%20de%20visite%20au%20Bénin." target="_blank" class="btn btn-primary">
+          <i class="fa-brands fa-whatsapp"></i> Contacter le Concierge
+        </a>
+        <a href="contact.html" class="btn btn-outline-white">
+          <i class="fa-regular fa-envelope"></i> Nous Écrire
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Infos Pratiques ───────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center" style="margin-bottom:48px;">
+      <span class="section-label reveal">Bénin Pratique</span>
+      <h2 class="section-title reveal">Informations <em>Pratiques</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="practical-grid">
+      <div class="practical-item reveal">
+        <i class="fa-solid fa-id-card"></i>
+        <h4>Visa</h4>
+        <p>Le visa est disponible à l'arrivée à l'aéroport Cadjehoun pour la plupart des nationalités. Nous pouvons vous assister.</p>
+      </div>
+      <div class="practical-item reveal" style="transition-delay:.08s">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <h4>Monnaie</h4>
+        <p>Le Franc CFA (XOF) est la monnaie locale. Les euros sont acceptés dans de nombreux commerces. DAB disponible à l'hôtel.</p>
+      </div>
+      <div class="practical-item reveal" style="transition-delay:.16s">
+        <i class="fa-solid fa-plane-arrival"></i>
+        <h4>Aéroport</h4>
+        <p>L'aéroport Cadjehoun est à 6,4 km de l'hôtel. Notre navette est disponible sur réservation 24h/24.</p>
+      </div>
+      <div class="practical-item reveal" style="transition-delay:.24s">
+        <i class="fa-solid fa-sun"></i>
+        <h4>Climat</h4>
+        <p>Tropical et chaud toute l'année. Meilleure saison de novembre à mars — température moyenne 28°C.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+<script src="js/components.js"></script>
+<script>initComponents('tourisme');</script>
+</body>
+</html>

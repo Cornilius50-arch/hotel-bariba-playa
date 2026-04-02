@@ -1,0 +1,12 @@
+# Sensitive config
+config/database.php
+setup.sql
+
+# Uploads (large binary files)
+uploads/
+
+# PHP sessions / cache
+*.log
+*.cache
+.DS_Store
+Thumbs.db

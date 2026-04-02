@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chambres & Suites — Hôtel Bariba Playa Cotonou</title>
+  <meta name="description" content="Découvrez nos chambres et suites élégantes au Bariba Playa. Standard, Vue Lagune, Suite Deluxe et Suite Familiale à Cotonou, Bénin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .page-hero-bg { background-image: url('uploads/gallery/chambre-bois.png'); }
+
+    /* Room cards full layout */
+    .room-full { margin-bottom: 80px; }
+    .room-full:last-child { margin-bottom: 0; }
+    .room-full-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .room-full:nth-child(even) .room-full-grid { direction: rtl; }
+    .room-full:nth-child(even) .room-full-grid > * { direction: ltr; }
+    .room-full-img { position: relative; min-height: 440px; overflow: hidden; }
+    .room-full-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .room-full:hover .room-full-img img { transform: scale(1.05); }
+    .room-tag-badge {
+      position: absolute; top: 20px; left: 20px; z-index: 2;
+      background: var(--gold); color: var(--dark);
+      font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 50px;
+    }
+    .room-full:nth-child(even) .room-tag-badge { left: auto; right: 20px; }
+    .room-full-body { background: var(--white); padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; }
+    .room-full-body h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .room-full-body .desc { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .room-amenities-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    .room-amenity-item { display: flex; align-items: center; gap: 9px; font-size: .84rem; color: var(--dark); }
+    .room-amenity-item i { color: var(--gold); font-size: .8rem; flex-shrink: 0; }
+    .room-price-row { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
+    .room-price-big { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--navy); }
+    .room-price-big span { font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 400; color: var(--muted); }
+
+    /* Policies */
+    .policies-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .policy-card { background: var(--cream); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--border); text-align: center; }
+    .policy-card i { font-size: 1.8rem; color: var(--gold); margin-bottom: 14px; display: block; }
+    .policy-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
+    .policy-card p { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+
+    /* Includes */
+    .includes-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .include-item { text-align: center; padding: 24px 16px; background: var(--white); border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,.06); border: 1px solid var(--border); transition: var(--transition); }
+    .include-item:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .include-item i { font-size: 1.5rem; color: var(--gold); display: block; margin-bottom: 10px; }
+    .include-item span { font-size: .82rem; color: var(--dark); font-weight: 500; }
+
+    @media (max-width:768px) {
+      .room-full-grid { grid-template-columns: 1fr; }
+      .room-full:nth-child(even) .room-full-grid { direction: ltr; }
+      .room-full-img { min-height: 280px; }
+      .room-full-body { padding: 28px 24px; }
+      .room-amenities-list { grid-template-columns: 1fr; }
+      .policies-grid { grid-template-columns: 1fr; }
+      .includes-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ─── Page Hero ────────────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="current">Chambres &amp; Suites</span>
+      </div>
+      <h1>Chambres &amp; <em>Suites</em></h1>
+      <p>Des espaces pensés pour votre confort, entre élégance africaine et modernité.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Inclus dans toutes les chambres ─────────────────────────── -->
+<section class="section-sm" style="background: var(--sand);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Inclus dans Toutes les Chambres</span>
+      <h2 class="section-title reveal">Le Confort <em>Bariba Playa</em></h2>
+    </div>
+    <div class="includes-grid" style="margin-top:36px;">
+      <div class="include-item reveal"><i class="fa-solid fa-wifi"></i><span>WiFi Haut Débit</span></div>
+      <div class="include-item reveal" style="transition-delay:.05s"><i class="fa-solid fa-snowflake"></i><span>Climatisation</span></div>
+      <div class="include-item reveal" style="transition-delay:.1s"><i class="fa-solid fa-tv"></i><span>TV Écran Plat</span></div>
+      <div class="include-item reveal" style="transition-delay:.15s"><i class="fa-solid fa-bottle-water"></i><span>Eau Minérale Offerte</span></div>
+      <div class="include-item reveal" style="transition-delay:.2s"><i class="fa-solid fa-mug-hot"></i><span>Machine à Café/Thé</span></div>
+      <div class="include-item reveal" style="transition-delay:.25s"><i class="fa-solid fa-refrigerator"></i><span>Réfrigérateur &amp; Minibar</span></div>
+      <div class="include-item reveal" style="transition-delay:.3s"><i class="fa-solid fa-shield-halved"></i><span>Coffre-fort</span></div>
+      <div class="include-item reveal" style="transition-delay:.35s"><i class="fa-solid fa-broom"></i><span>Ménage Quotidien</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Rooms List ───────────────────────────────────────────────── -->
+<section class="section" style="background: var(--white);">
+  <div class="container">
+
+    <!-- Chambre Standard -->
+    <div class="room-full reveal">
+      <div class="room-full-grid">
+        <div class="room-full-img">
+          <img src="uploads/gallery/chambre-jaune.png" alt="Chambre Standard" />
+          <span class="room-tag-badge">Standard</span>
+        </div>
+        <div class="room-full-body">
+          <h2>Chambre Standard</h2>
+          <p class="desc">Idéale pour les voyageurs individuels ou les couples, notre chambre standard allie simplicité et élégance. Décorée avec soin dans des teintes chaleureuses, elle offre tout le nécessaire pour un séjour confortable à Cotonou.</p>
+          <div class="room-amenities-list">
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Lit double ou twin</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Salle de bain privée</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Climatisation</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> TV Écran Plat</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> WiFi Gratuit</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Bureau de travail</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Réfrigérateur</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Moustiquaire</span>
+          </div>
+          <div class="room-price-row">
+            <div><div class="room-price-big">15 000 FCFA <span>/ nuit</span></div><div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Petit-déjeuner continental en option</div></div>
+            <a href="contact.html" class="btn btn-primary">Réserver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chambre Vue Lagune -->
+    <div class="room-full reveal">
+      <div class="room-full-grid">
+        <div class="room-full-img">
+          <img src="uploads/gallery/chambre-orange.png" alt="Chambre Vue Lagune" />
+          <span class="room-tag-badge">Vue Lagune</span>
+        </div>
+        <div class="room-full-body">
+          <h2>Chambre Vue Lagune</h2>
+          <p class="desc">Réveillez-vous chaque matin face aux eaux apaisantes de la lagune depuis votre balcon privé. Cette chambre supérieure offre un cadre romantique et apaisant, idéal pour un séjour en couple ou une escapade de détente.</p>
+          <div class="room-amenities-list">
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Lit Kingsize</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Balcon privé vue lagune</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Canapé-lit</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Salle de bain marbre</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Machine à café Nespresso</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Peignoirs &amp; chaussons</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Minibar garni</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Service de repassage</span>
+          </div>
+          <div class="room-price-row">
+            <div><div class="room-price-big">25 000 FCFA <span>/ nuit</span></div><div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Petit-déjeuner inclus</div></div>
+            <a href="contact.html" class="btn btn-primary">Réserver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suite Deluxe -->
+    <div class="room-full reveal">
+      <div class="room-full-grid">
+        <div class="room-full-img">
+          <img src="uploads/gallery/chambre-orange-luxe.png" alt="Suite Deluxe" />
+          <span class="room-tag-badge">Suite Deluxe</span>
+        </div>
+        <div class="room-full-body">
+          <h2>Suite Deluxe</h2>
+          <p class="desc">L'expérience ultime au Bariba Playa. Notre suite deluxe offre un espace de vie exceptionnel avec salon séparé, salle de bain luxueuse et terrasse panoramique. Service de conciergerie dédié disponible 24h/24.</p>
+          <div class="room-amenities-list">
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Lit Extra-Long Kingsize</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Salon séparé</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Terrasse privée panoramique</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Baignoire à remous</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Service chambre 24h</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Bouteille de bienvenue</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> TV 55" écran plat</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Dressing &amp; armoire</span>
+          </div>
+          <div class="room-price-row">
+            <div><div class="room-price-big">45 000 FCFA <span>/ nuit</span></div><div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Petit-déjeuner &amp; accueil inclus</div></div>
+            <a href="contact.html" class="btn btn-primary">Réserver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suite Familiale -->
+    <div class="room-full reveal">
+      <div class="room-full-grid">
+        <div class="room-full-img">
+          <img src="uploads/gallery/chambre-familiale.png" alt="Suite Familiale" />
+          <span class="room-tag-badge">Familiale</span>
+        </div>
+        <div class="room-full-body">
+          <h2>Suite Familiale</h2>
+          <p class="desc">Conçue pour accueillir toute la famille dans les meilleures conditions, notre suite familiale dispose de deux chambres communicantes, d'un espace de vie commun et de toutes les commodités pour un séjour en famille réussi.</p>
+          <div class="room-amenities-list">
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> 2 chambres communicantes</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Lit double + lits jumeaux</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Salon commun</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> 2 salles de bain</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Balcon avec vue</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Jeux pour enfants</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Cuisine équipée</span>
+            <span class="room-amenity-item"><i class="fa-solid fa-check-circle"></i> Lit bébé disponible</span>
+          </div>
+          <div class="room-price-row">
+            <div><div class="room-price-big">55 000 FCFA <span>/ nuit</span></div><div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Petit-déjeuner inclus — Enfants &lt; 12 ans gratuits</div></div>
+            <a href="contact.html" class="btn btn-primary">Réserver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Policies ─────────────────────────────────────────────────── -->
+<section class="section" style="background: var(--cream);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Informations Pratiques</span>
+      <h2 class="section-title reveal">Politiques de l'<em>Hôtel</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="policies-grid" style="margin-top:48px;">
+      <div class="policy-card reveal">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <h4>Check-in</h4>
+        <p>Arrivée à partir de <strong>14h00</strong>.<br>Check-in anticipé selon disponibilité.<br>Réception ouverte 24h/24.</p>
+      </div>
+      <div class="policy-card reveal" style="transition-delay:.1s">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <h4>Check-out</h4>
+        <p>Départ avant <strong>12h00</strong>.<br>Late check-out possible sur demande.<br>Bagagerie disponible gratuitement.</p>
+      </div>
+      <div class="policy-card reveal" style="transition-delay:.2s">
+        <i class="fa-solid fa-credit-card"></i>
+        <h4>Paiement</h4>
+        <p>Espèces FCFA, Visa, Mastercard.<br>Mobile Money accepté.<br>Devises étrangères au taux du jour.</p>
+      </div>
+      <div class="policy-card reveal" style="transition-delay:.05s">
+        <i class="fa-solid fa-paw"></i>
+        <h4>Animaux</h4>
+        <p>Les animaux de compagnie ne sont pas admis dans l'établissement. Contact préalable pour exceptions.</p>
+      </div>
+      <div class="policy-card reveal" style="transition-delay:.15s">
+        <i class="fa-solid fa-smoking-ban"></i>
+        <h4>Non-Fumeur</h4>
+        <p>Hôtel entièrement non-fumeur. Espaces fumeurs désignés en extérieur disponibles.</p>
+      </div>
+      <div class="policy-card reveal" style="transition-delay:.25s">
+        <i class="fa-solid fa-xmark-circle"></i>
+        <h4>Annulation</h4>
+        <p>Annulation gratuite jusqu'à <strong>48h</strong> avant l'arrivée. Politique flexible selon la saison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────────────────────────── -->
+<section style="background: var(--navy); padding: 80px 0; text-align:center;">
+  <div class="container">
+    <h2 class="reveal" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--white); margin-bottom:16px;">Trouvez Votre Chambre Idéale</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.65); font-size:1rem; max-width:440px; margin:0 auto 32px; line-height:1.75;">Contactez-nous pour une offre personnalisée ou réservez directement en ligne.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary"><i class="fa-regular fa-calendar-check"></i> Réserver Maintenant</a>
+      <a href="tel:+22997856500" class="btn btn-outline-white"><i class="fa-solid fa-phone"></i> Appeler l'Hôtel</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+<script src="js/components.js"></script>
+<script>initComponents('chambres');</script>
+</body>
+</html>

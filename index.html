@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hôtel Bariba Playa — Accueil | Cotonou, Bénin</title>
+  <meta name="description" content="Hôtel Bariba Playa, votre havre de paix au bord de la lagune à Fidjrossè, Cotonou. Chambres élégantes, restaurant africain & international, spa et plus encore." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Hero Slider ────────────────────────────────────────── */
+    #hero { min-height: 100vh; position: relative; overflow: hidden; }
+
+    /* ── Booking Bar ────────────────────────────────────────── */
+    #booking-bar { background: var(--white); box-shadow: var(--shadow-lg); position: relative; z-index: 10; }
+    .booking-inner { display: flex; align-items: stretch; }
+    .booking-field { flex: 1; padding: 20px 22px; border-right: 1px solid #f0e8de; position: relative; }
+    .booking-field:last-of-type { border-right: none; }
+    .booking-field label { display: block; font-size: .65rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .booking-field input, .booking-field select { width: 100%; border: none; outline: none; font-family: 'Inter', sans-serif; font-size: .9rem; color: var(--dark); background: transparent; cursor: pointer; }
+    .booking-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-l));
+      padding: 0 36px; display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--white); gap: 10px; cursor: pointer; transition: var(--transition); white-space: nowrap;
+      text-decoration: none;
+    }
+    .booking-cta:hover { filter: brightness(1.08); }
+
+    /* ── About ──────────────────────────────────────────────── */
+    #about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-images { position: relative; height: 520px; }
+    .about-img-main { position: absolute; top: 0; left: 0; width: 76%; height: 78%; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+    .about-img-accent { position: absolute; bottom: 0; right: 0; width: 52%; height: 52%; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 6px solid var(--white); }
+    .about-badge {
+      position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, var(--gold), var(--gold-l));
+      border-radius: 50%; width: 108px; height: 108px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 8px 28px rgba(201,149,42,.4); z-index: 3;
+    }
+    .about-badge .bn { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--dark); line-height: 1; }
+    .about-badge .bt { font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dark); text-align: center; margin-top: 4px; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+    .about-feature { display: flex; align-items: flex-start; gap: 12px; }
+    .about-feature .ico { flex-shrink: 0; width: 40px; height: 40px; background: var(--gold-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: .95rem; }
+    .about-feature h4 { font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+    .about-feature p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Featured Rooms ─────────────────────────────────────── */
+    .rooms-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .room-card { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); background: var(--white); border: 1px solid rgba(0,0,0,.05); }
+    .room-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
+    .room-img { position: relative; height: 230px; overflow: hidden; }
+    .room-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; }
+    .room-card:hover .room-img img { transform: scale(1.07); }
+    .room-tag { position: absolute; top: 14px; left: 14px; background: var(--navy); color: var(--gold-l); font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; }
+    .room-body { padding: 22px; }
+    .room-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 7px; }
+    .room-body p { font-size: .83rem; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .room-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid #f0ecec; }
+    .room-price { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+    .room-price span { font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 400; color: var(--muted); }
+    .room-link { font-size: .78rem; font-weight: 600; color: var(--gold); display: flex; align-items: center; gap: 5px; transition: gap var(--transition); }
+    .room-link:hover { gap: 9px; }
+
+    /* ── Amenities Strip ────────────────────────────────────── */
+    #amenities-strip { background: var(--navy); padding: 80px 0; }
+    .strip-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; margin-top: 48px; }
+    .strip-item { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: var(--radius); padding: 26px 16px; text-align: center; transition: var(--transition); }
+    .strip-item:hover { background: rgba(201,149,42,.14); border-color: rgba(201,149,42,.35); transform: translateY(-4px); }
+    .strip-item i { display: block; font-size: 1.6rem; color: var(--gold-l); margin-bottom: 12px; }
+    .strip-item span { font-size: .78rem; color: rgba(255,255,255,.7); font-weight: 500; }
+
+    /* ── Restaurant Teaser ──────────────────────────────────── */
+    #resto-teaser { background: var(--sand); }
+    .resto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .resto-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .resto-photos img { border-radius: var(--radius); object-fit: cover; width: 100%; }
+    .resto-photos img:first-child { grid-column: 1/3; height: 230px; }
+    .resto-photos img:nth-child(n+2) { height: 160px; }
+
+    /* ── Reviews ────────────────────────────────────────────── */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .review-card { background: var(--cream); border-radius: var(--radius); padding: 28px; border: 1px solid rgba(201,149,42,.14); transition: var(--transition); }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--gold); }
+    .stars { display: flex; gap: 3px; margin-bottom: 14px; }
+    .stars i { color: var(--gold); font-size: .82rem; }
+    .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--dark); line-height: 1.75; margin-bottom: 20px; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-l)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark); font-size: .95rem; flex-shrink: 0; }
+    .author-name { font-weight: 600; font-size: .88rem; color: var(--navy); }
+    .author-origin { font-size: .74rem; color: var(--muted); }
+    .review-platform { margin-left: auto; font-size: .7rem; color: var(--muted); }
+
+    /* ── Rating Showcase ────────────────────────────────────── */
+    .rating-showcase { background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: var(--radius); padding: 44px; margin-top: 40px; display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 24px; }
+    .rating-item { text-align: center; }
+    .rating-item .big { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold-l); line-height: 1; }
+    .rating-item .lbl { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-top: 6px; }
+    .rating-divider { width: 1px; height: 56px; background: rgba(255,255,255,.14); }
+
+    /* ── CTA Banner ─────────────────────────────────────────── */
+    #cta-banner {
+      background: linear-gradient(135deg, rgba(10,31,46,.9) 0%, rgba(26,74,110,.9) 100%),
+                  url('uploads/gallery/laplaya-nuit.png') center/cover no-repeat;
+      padding: 100px 0;
+      text-align: center;
+    }
+    #cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    #cta-banner p { font-size: 1rem; color: rgba(255,255,255,.72); max-width: 480px; margin: 0 auto 36px; line-height: 1.75; }
+    #cta-banner .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .strip-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 768px) {
+      .about-grid, .resto-grid { grid-template-columns: 1fr; }
+      .about-images { height: 300px; }
+      .about-badge { display: none; }
+      .rooms-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .strip-grid { grid-template-columns: repeat(2,1fr); }
+      .booking-inner { flex-direction: column; }
+      .booking-cta { padding: 18px; }
+      .hero-stats { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ─── Hero Slider ───────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-slider" id="heroSlider">
+
+    <div class="hero-slide active" style="background-image:url('uploads/gallery/facade-hotel.png');">
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="slide-label">Hôtel 3 Étoiles — Cotonou, Bénin</div>
+        <h1 class="slide-title">Bienvenue au<br><em>Bariba Playa</em></h1>
+        <p class="slide-desc">Votre havre de paix au bord de la lagune de Fidjrossè. Authenticité africaine, confort international.</p>
+        <div class="slide-actions">
+          <a href="contact.html" class="btn btn-primary"><i class="fa-regular fa-calendar-check"></i> Réserver</a>
+          <a href="chambres.html" class="btn btn-outline-white">Nos Chambres</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('uploads/gallery/chambre-orange-luxe.png');">
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="slide-label">Hébergement</div>
+        <h1 class="slide-title">Chambres &amp;<br><em>Suites de Prestige</em></h1>
+        <p class="slide-desc">Des espaces conçus pour votre confort — décorés avec l'art et les couleurs de l'Afrique de l'Ouest.</p>
+        <div class="slide-actions">
+          <a href="chambres.html" class="btn btn-primary">Voir les Chambres</a>
+          <a href="contact.html" class="btn btn-outline-white">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('uploads/gallery/bar-laplaya-nuit.png');">
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="slide-label">Restaurant &amp; Bar</div>
+        <h1 class="slide-title">La Playa —<br><em>Art de Vivre</em></h1>
+        <p class="slide-desc">Lounge, bar, restaurant et salle VIP. Gastronomie africaine et internationale dans un cadre unique.</p>
+        <div class="slide-actions">
+          <a href="restaurant.html" class="btn btn-primary">Découvrir</a>
+          <a href="contact.html" class="btn btn-outline-white">Réserver une Table</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('uploads/gallery/suite-jaune.png');">
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="slide-label">Événements &amp; Séminaires</div>
+        <h1 class="slide-title"><em>Privatisez</em><br>Notre Établissement</h1>
+        <p class="slide-desc">Mariages, galas, séminaires d'entreprise — notre équipe prend en charge chaque détail de votre événement.</p>
+        <div class="slide-actions">
+          <a href="services.html" class="btn btn-primary">En Savoir Plus</a>
+          <a href="contact.html" class="btn btn-outline-white">Demander un Devis</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="hero-arrow hero-arrow-prev" onclick="moveSlide(-1)" aria-label="Précédent">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <button class="hero-arrow hero-arrow-next" onclick="moveSlide(1)" aria-label="Suivant">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- ─── Booking Bar ───────────────────────────────────────────────  -->
+<div id="booking-bar">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-field">
+        <label><i class="fa-regular fa-calendar"></i> Arrivée</label>
+        <input type="date" id="checkin" />
+      </div>
+      <div class="booking-field">
+        <label><i class="fa-regular fa-calendar-check"></i> Départ</label>
+        <input type="date" id="checkout" />
+      </div>
+      <div class="booking-field">
+        <label><i class="fa-solid fa-user-group"></i> Voyageurs &amp; Chambres</label>
+        <div class="occupancy-wrap">
+          <button class="occupancy-btn" id="occBtn" type="button" onclick="toggleOccupancy()">
+            <span id="occLabel">2 Adultes · 1 Chambre</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="occupancy-popup" id="occPopup">
+            <div class="occ-row">
+              <div><div class="occ-label">Chambres</div></div>
+              <div class="occ-controls">
+                <button class="occ-btn" onclick="changeOcc('rooms',-1)" id="rooms-minus">−</button>
+                <span class="occ-val" id="rooms-val">1</span>
+                <button class="occ-btn" onclick="changeOcc('rooms',1)">+</button>
+              </div>
+            </div>
+            <div class="occ-row">
+              <div><div class="occ-label">Adultes</div><div class="occ-sub">18 ans et plus</div></div>
+              <div class="occ-controls">
+                <button class="occ-btn" onclick="changeOcc('adults',-1)" id="adults-minus">−</button>
+                <span class="occ-val" id="adults-val">2</span>
+                <button class="occ-btn" onclick="changeOcc('adults',1)">+</button>
+              </div>
+            </div>
+            <div class="occ-row">
+              <div><div class="occ-label">Enfants</div><div class="occ-sub">Moins de 18 ans</div></div>
+              <div class="occ-controls">
+                <button class="occ-btn" onclick="changeOcc('children',-1)" id="children-minus" disabled>−</button>
+                <span class="occ-val" id="children-val">0</span>
+                <button class="occ-btn" onclick="changeOcc('children',1)">+</button>
+              </div>
+            </div>
+            <div class="promo-row">
+              <input type="text" placeholder="Code promotionnel (optionnel)" id="promoCode" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="booking-field">
+        <label><i class="fa-solid fa-bed"></i> Type de Chambre</label>
+        <select id="roomType">
+          <option value="">Toutes les chambres</option>
+          <option value="standard">Chambre Standard — 15 000 FCFA</option>
+          <option value="lagune">Chambre Vue Lagune — 25 000 FCFA</option>
+          <option value="deluxe">Suite Deluxe — 45 000 FCFA</option>
+          <option value="familiale">Suite Familiale — 55 000 FCFA</option>
+        </select>
+      </div>
+      <a href="contact.html" class="booking-cta" id="bookingCta">
+        <i class="fa-solid fa-magnifying-glass"></i> Vérifier Disponibilité
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── About ───────────────────────────────────────────────────── -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images reveal-left">
+        <img class="about-img-main" src="uploads/gallery/facade-hotel.png" alt="Hôtel Bariba Playa" />
+        <img class="about-img-accent" src="uploads/gallery/laplaya-nuit.png" alt="La Playa de nuit" />
+        <div class="about-badge"><span class="bn">3★</span><span class="bt">Hôtel<br>Classé</span></div>
+      </div>
+      <div class="about-text reveal-right">
+        <span class="section-label">Notre Histoire</span>
+        <h2 class="section-title">Bienvenue au<br><span>Bariba Playa</span></h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Niché dans le quartier verdoyant de Fidjrossè sur les rives de la lagune de Cotonou, l'Hôtel Bariba Playa est un refuge d'authenticité et de confort moderne. À seulement 13 minutes à pied de la plage et 6,4 km de l'aéroport Cadjehoun.</p>
+        <p class="section-subtitle" style="margin-top:12px;">Alliant l'hospitalité chaleureuse du Bénin aux standards internationaux, nous créons des expériences inoubliables pour les voyageurs d'affaires comme pour les touristes.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="ico"><i class="fa-solid fa-wifi"></i></div>
+            <div><h4>WiFi Gratuit</h4><p>Dans tout l'établissement</p></div>
+          </div>
+          <div class="about-feature">
+            <div class="ico"><i class="fa-solid fa-car"></i></div>
+            <div><h4>Parking Gratuit</h4><p>Stationnement sécurisé</p></div>
+          </div>
+          <div class="about-feature">
+            <div class="ico"><i class="fa-solid fa-utensils"></i></div>
+            <div><h4>Restaurant</h4><p>Cuisine africaine & internationale</p></div>
+          </div>
+          <div class="about-feature">
+            <div class="ico"><i class="fa-solid fa-shuttle-van"></i></div>
+            <div><h4>Navette Aéroport</h4><p>Transferts sur demande</p></div>
+          </div>
+        </div>
+        <a href="chambres.html" class="btn btn-dark" style="margin-top:32px;">
+          Découvrir nos Chambres <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Rooms — Tamarin overlay style ────────────────────────────── -->
+<section id="rooms" style="background:var(--white); padding:100px 0;">
+  <div class="container">
+    <div class="section-header center" style="margin-bottom:52px;">
+      <span class="section-label reveal">Hébergement</span>
+      <h2 class="section-title reveal">Nos Chambres &amp; <em>Suites</em></h2>
+      <p class="section-subtitle reveal" style="max-width:500px;margin:16px auto 0;">Chaque espace est une invitation au repos — décorés avec les couleurs et l'artisanat de l'Afrique de l'Ouest.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+  </div>
+  <div class="rooms-overlay-grid reveal">
+    <div class="room-overlay-card">
+      <img class="room-overlay-img" src="uploads/gallery/chambre-orange-luxe.png" alt="Suite Deluxe" loading="lazy" />
+      <div class="room-overlay-info">
+        <div class="room-overlay-tag">Chambre Signature</div>
+        <div class="room-overlay-name">Suite Deluxe</div>
+        <div class="room-overlay-size">Dès 45 000 FCFA / nuit</div>
+        <div class="room-overlay-actions">
+          <a href="chambres.html" class="btn btn-outline-white btn-sm">Détails</a>
+          <a href="contact.html" class="btn btn-primary btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-overlay-card">
+      <img class="room-overlay-img" src="uploads/gallery/chambre-jaune.png" alt="Chambre Standard" loading="lazy" />
+      <div class="room-overlay-info">
+        <div class="room-overlay-tag">Chambre</div>
+        <div class="room-overlay-name">Standard — 18 m²</div>
+        <div class="room-overlay-size">Dès 15 000 FCFA / nuit</div>
+        <div class="room-overlay-actions">
+          <a href="chambres.html" class="btn btn-outline-white btn-sm">Détails</a>
+          <a href="contact.html" class="btn btn-primary btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-overlay-card">
+      <img class="room-overlay-img" src="uploads/gallery/chambre-orange.png" alt="Chambre Vue Lagune" loading="lazy" />
+      <div class="room-overlay-info">
+        <div class="room-overlay-tag">Vue Lagune</div>
+        <div class="room-overlay-name">Chambre Vue Lagune</div>
+        <div class="room-overlay-size">Dès 25 000 FCFA / nuit</div>
+        <div class="room-overlay-actions">
+          <a href="chambres.html" class="btn btn-outline-white btn-sm">Détails</a>
+          <a href="contact.html" class="btn btn-primary btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-overlay-card">
+      <img class="room-overlay-img" src="uploads/gallery/chambre-familiale.png" alt="Suite Familiale" loading="lazy" />
+      <div class="room-overlay-info">
+        <div class="room-overlay-tag">Suite</div>
+        <div class="room-overlay-name">Suite Familiale — 40 m²</div>
+        <div class="room-overlay-size">Dès 55 000 FCFA / nuit</div>
+        <div class="room-overlay-actions">
+          <a href="chambres.html" class="btn btn-outline-white btn-sm">Détails</a>
+          <a href="contact.html" class="btn btn-primary btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <a href="chambres.html" class="btn btn-outline-dark">Voir toutes nos Chambres <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- ─── Special Offers ──────────────────────────────────────────── -->
+<section id="offres" class="section" style="background:var(--sand);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Promotions</span>
+      <h2 class="section-title reveal">Offres &amp; <em>Avantages Exclusifs</em></h2>
+      <p class="section-subtitle reveal" style="max-width:500px;margin:14px auto 0;">Profitez de nos tarifs préférentiels en réservant directement auprès de l'hôtel.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card reveal">
+        <div class="offer-img">
+          <img src="uploads/gallery/chambre-orange-luxe.png" alt="Séjour Long" />
+          <span class="offer-badge">−15%</span>
+        </div>
+        <div class="offer-body">
+          <h3>Séjour Longue Durée</h3>
+          <p>Restez 5 nuits ou plus et bénéficiez de 15% de réduction sur votre hébergement, petit-déjeuner inclus chaque matin.</p>
+          <div class="offer-footer">
+            <div class="offer-price"><strong>Dès 12 750 FCFA</strong>/ nuit</div>
+            <a href="contact.html" class="offer-link">Réserver <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="offer-card reveal" style="transition-delay:.1s">
+        <div class="offer-img">
+          <img src="uploads/gallery/brochette-poulet.png" alt="Dîner & Nuit" />
+          <span class="offer-badge" style="background:var(--green);">Package</span>
+        </div>
+        <div class="offer-body">
+          <h3>Package Dîner &amp; Nuit</h3>
+          <p>Une nuit en chambre standard avec dîner gastronomique pour deux au restaurant La Playa inclus dans le tarif.</p>
+          <div class="offer-footer">
+            <div class="offer-price"><strong>25 000 FCFA</strong>/ couple</div>
+            <a href="contact.html" class="offer-link">Réserver <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="offer-card reveal" style="transition-delay:.2s">
+        <div class="offer-img">
+          <img src="uploads/gallery/chambre-suite-moderne.png" alt="Voyage d'Affaires" />
+          <span class="offer-badge" style="background:var(--blue);">Business</span>
+        </div>
+        <div class="offer-body">
+          <h3>Tarif Voyage d'Affaires</h3>
+          <p>Accès salle de réunion, WiFi haute vitesse, petit-déjeuner et navette aéroport — tout compris pour vos déplacements pro.</p>
+          <div class="offer-footer">
+            <div class="offer-price"><strong>Dès 20 000 FCFA</strong>/ nuit</div>
+            <a href="contact.html" class="offer-link">Réserver <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Amenities Strip ──────────────────────────────────────────── -->
+<section id="amenities-strip">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+      <div>
+        <span class="section-label reveal" style="color:var(--gold-l);">Équipements</span>
+        <h2 class="section-title reveal" style="color:var(--white);">Tout pour Votre <em style="color:var(--gold-l);">Confort</em></h2>
+      </div>
+      <a href="services.html" class="btn btn-outline-white reveal">Tous les services <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="strip-grid">
+      <div class="strip-item reveal"><i class="fa-solid fa-wifi"></i><span>WiFi Gratuit</span></div>
+      <div class="strip-item reveal" style="transition-delay:.05s"><i class="fa-solid fa-utensils"></i><span>Restaurant</span></div>
+      <div class="strip-item reveal" style="transition-delay:.1s"><i class="fa-solid fa-spa"></i><span>Espace Massage</span></div>
+      <div class="strip-item reveal" style="transition-delay:.15s"><i class="fa-solid fa-car"></i><span>Parking Gratuit</span></div>
+      <div class="strip-item reveal" style="transition-delay:.2s"><i class="fa-solid fa-briefcase"></i><span>Business Center</span></div>
+      <div class="strip-item reveal" style="transition-delay:.25s"><i class="fa-solid fa-shuttle-van"></i><span>Navette Airport</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Séminaires & Événements ──────────────────────────────────── -->
+<section id="seminaires" class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="seminar-grid reveal">
+      <div class="seminar-img">
+        <img src="uploads/gallery/bar-laplaya-nuit.png" alt="Salle de séminaire Bariba Playa" />
+        <div class="seminar-overlay"></div>
+      </div>
+      <div class="seminar-body">
+        <span class="section-label" style="color:var(--gold-l);">Événements &amp; Séminaires</span>
+        <h2 class="section-title" style="color:var(--white);">Organisez Vos Événements <em style="color:var(--gold-l);">Chez Nous</em></h2>
+        <div class="divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-l));"></div>
+        <p style="color:rgba(255,255,255,.72); line-height:1.8; margin-top:16px; font-size:.95rem;">De la réunion d'affaires au grand gala, en passant par les mariages et réceptions, notre équipe dédiée aux événements prend en charge chaque détail pour garantir le succès de votre journée.</p>
+        <div class="seminar-caps">
+          <div class="cap-item"><div class="n">50</div><div class="l">Personnes max.</div></div>
+          <div class="cap-item"><div class="n">2</div><div class="l">Salles équipées</div></div>
+          <div class="cap-item"><div class="n">HD</div><div class="l">Vidéoprojecteur</div></div>
+          <div class="cap-item"><div class="n">24/7</div><div class="l">WiFi Haut Débit</div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="services.html" class="btn btn-primary"><i class="fa-solid fa-building-columns"></i> En Savoir Plus</a>
+          <a href="contact.html" class="btn btn-outline-white">Demander un Devis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Restaurant Teaser ────────────────────────────────────────── -->
+<section id="resto-teaser" class="section">
+  <div class="container">
+    <div class="resto-grid">
+      <div class="reveal-left">
+        <span class="section-label">Gastronomie</span>
+        <h2 class="section-title">Le Restaurant <em>Bariba</em></h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Voyage culinaire entre Afrique et saveurs du monde. Petit-déjeuner continental, brunch dominical, déjeuners et dîners gastronomiques dans une ambiance chaleureuse.</p>
+        <p class="section-subtitle" style="margin-top:12px;">Options végétariennes, vegan et sans gluten. Service de 6h à 23h, 7j/7.</p>
+        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="restaurant.html" class="btn btn-primary">Voir le Menu <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="contact.html" class="btn btn-outline-dark">Réserver une Table</a>
+        </div>
+      </div>
+      <div class="resto-photos reveal-right">
+        <img src="uploads/gallery/bar-laplaya-nuit.png" alt="La Playa Bar & Resto" />
+        <img src="uploads/gallery/brochette-poulet.png" alt="Brochette de poulet" />
+        <img src="uploads/gallery/restaurant-promo.png" alt="Menu La Playa" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Programme Fidélité ────────────────────────────────────────── -->
+<section class="loyalty-section">
+  <div class="container">
+    <div class="loyalty-inner">
+      <div class="reveal-left">
+        <span class="section-label" style="color:var(--gold-l);">Programme Fidélité</span>
+        <h2 class="section-title" style="color:var(--white);">Revenez, <em style="color:var(--gold-l);">Vous Êtes Chez Vous</em></h2>
+        <div class="divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-l));"></div>
+        <p style="color:rgba(255,255,255,.72);line-height:1.8;margin-top:16px;font-size:.95rem;">En tant qu'hôte fidèle du Bariba Playa, profitez d'avantages exclusifs à chaque séjour. Plus vous revenez, plus vous bénéficiez de réductions, upgrades et services premium.</p>
+        <div class="loyalty-perks">
+          <div class="perk reveal" style="transition-delay:.05s">
+            <i class="fa-solid fa-percent"></i>
+            <h4>Jusqu'à 20% de Réduction</h4>
+            <p>Sur toutes vos réservations directes</p>
+          </div>
+          <div class="perk reveal" style="transition-delay:.1s">
+            <i class="fa-solid fa-arrow-up"></i>
+            <h4>Upgrade Gratuit</h4>
+            <p>Selon disponibilité à l'arrivée</p>
+          </div>
+          <div class="perk reveal" style="transition-delay:.15s">
+            <i class="fa-solid fa-utensils"></i>
+            <h4>Petit-Déjeuner Offert</h4>
+            <p>Dès votre 3ème séjour</p>
+          </div>
+          <div class="perk reveal" style="transition-delay:.2s">
+            <i class="fa-solid fa-clock"></i>
+            <h4>Late Check-out</h4>
+            <p>Départ jusqu'à 15h00 inclus</p>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:28px;">
+          <i class="fa-solid fa-id-card"></i> S'inscrire au Programme
+        </a>
+      </div>
+      <div class="loyalty-visual reveal-right">
+        <img src="uploads/gallery/chambre-orange-luxe.png" alt="Chambre Bariba Playa" />
+        <div class="loyalty-card">
+          <div class="loyalty-card-icon"><i class="fa-solid fa-crown"></i></div>
+          <div class="loyalty-card-text">
+            <div class="t">Membre Privilège</div>
+            <div class="s">Réservez directement — meilleur tarif garanti</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Reviews ──────────────────────────────────────────────────── -->
+<section id="reviews" class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Témoignages</span>
+      <h2 class="section-title reveal">Ce Que Disent <em>Nos Hôtes</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="review-text">"Un vrai bijou au bord de la lagune. Le personnel est d'une gentillesse remarquable et les chambres sont impeccables. Je recommande vivement !"</p>
+        <div class="review-author">
+          <div class="avatar">AM</div>
+          <div><div class="author-name">Amira M.</div><div class="author-origin">Lagos, Nigeria</div></div>
+          <div class="review-platform"><i class="fa-brands fa-tripadvisor"></i> TripAdvisor</div>
+        </div>
+      </div>
+      <div class="review-card reveal" style="transition-delay:.1s">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="review-text">"Séjour professionnel parfait. La salle de réunion est bien équipée, le WiFi est stable et le restaurant propose d'excellentes spécialités locales."</p>
+        <div class="review-author">
+          <div class="avatar">JP</div>
+          <div><div class="author-name">Jean-Pierre K.</div><div class="author-origin">Paris, France</div></div>
+          <div class="review-platform"><i class="fa-solid fa-globe"></i> Booking.com</div>
+        </div>
+      </div>
+      <div class="review-card reveal" style="transition-delay:.2s">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="review-text">"Cadre magnifique, cuisine délicieuse et accueil à la hauteur. La navette aéroport est très pratique. On reviendra sans hésitation !"</p>
+        <div class="review-author">
+          <div class="avatar">FK</div>
+          <div><div class="author-name">Fatoumata K.</div><div class="author-origin">Abidjan, Côte d'Ivoire</div></div>
+          <div class="review-platform"><i class="fa-solid fa-globe"></i> Trip.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="rating-showcase reveal">
+      <div class="rating-item"><div class="big">5.0</div><div class="lbl">TripAdvisor</div></div>
+      <div class="rating-divider"></div>
+      <div class="rating-item"><div class="big">10/10</div><div class="lbl">Trip.com</div></div>
+      <div class="rating-divider"></div>
+      <div class="rating-item"><div class="big">#16</div><div class="lbl">Petits Hôtels Cotonou</div></div>
+      <div class="rating-divider"></div>
+      <div class="rating-item"><div class="big">15+</div><div class="lbl">Chambres</div></div>
+      <div class="rating-divider"></div>
+      <div class="rating-item"><div class="big">24/7</div><div class="lbl">Service Réception</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Privatisation ────────────────────────────────────────────── -->
+<section class="privatisation-section section">
+  <div class="privatisation-bg" style="background-image:url('uploads/gallery/chambre-suite-moderne.png');"></div>
+  <div class="privatisation-overlay"></div>
+  <div class="container">
+    <div class="privatisation-content">
+      <span class="section-label reveal" style="color:var(--gold-l);">Événements Privés</span>
+      <h2 class="section-title reveal" style="color:var(--white);">Privatisez<br><em style="color:var(--gold-l);">Notre Établissement</em></h2>
+      <div class="divider reveal" style="background:linear-gradient(90deg,var(--gold),var(--gold-l));"></div>
+      <p class="reveal" style="color:rgba(255,255,255,.75);line-height:1.8;margin-top:18px;font-size:1rem;max-width:520px;">Mariages, anniversaires, lancements de produit, galas d'entreprise — nous mettons l'intégralité de l'hôtel à votre disposition pour des événements inoubliables.</p>
+      <div class="privatisation-features reveal">
+        <div class="priv-feat"><div class="n">50+</div><div class="l">Invités</div></div>
+        <div class="priv-feat"><div class="n">2</div><div class="l">Salles</div></div>
+        <div class="priv-feat"><div class="n">24h</div><div class="l">Service dédié</div></div>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;" class="reveal">
+        <a href="services.html" class="btn btn-primary"><i class="fa-solid fa-champagne-glasses"></i> Organiser mon Événement</a>
+        <a href="contact.html" class="btn btn-outline-white">Demander un Devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Tourisme Teaser ────────────────────────────────────────────── -->
+<section style="background:var(--white);padding:100px 0;">
+  <div class="container">
+    <div class="section-header center" style="margin-bottom:48px;">
+      <span class="section-label reveal">Découverte</span>
+      <h2 class="section-title reveal">Explorez le <em>Bénin</em></h2>
+      <p class="section-subtitle reveal" style="max-width:500px;margin:14px auto 0;">Partez à la découverte des merveilles culturelles et naturelles du Bénin depuis notre hôtel.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+  </div>
+  <div class="tourisme-grid reveal">
+    <div class="tourisme-card">
+      <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=900&q=80&auto=format" alt="Ganvié" loading="lazy" />
+      <div class="tourisme-card-info">
+        <span>Village lacustre</span>
+        <h4>Ganvié</h4>
+      </div>
+    </div>
+    <div class="tourisme-card">
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=80&auto=format" alt="Ouidah" loading="lazy" />
+      <div class="tourisme-card-info">
+        <span>Histoire &amp; Culture</span>
+        <h4>Ouidah</h4>
+      </div>
+    </div>
+    <div class="tourisme-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format" alt="Plage de Fidjrossè" loading="lazy" />
+      <div class="tourisme-card-info">
+        <span>À 13 min à pied</span>
+        <h4>Plage de Fidjrossè</h4>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <a href="tourisme.html" class="btn btn-outline-dark">Explorer le Bénin <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- ─── Awards Strip ──────────────────────────────────────────────── -->
+<div class="awards-strip">
+  <div class="container">
+    <div class="awards-inner">
+      <div class="award-item">
+        <i class="fa-brands fa-tripadvisor" style="color:#34e0a1;"></i>
+        <span>5/5 TripAdvisor<br>Excellence</span>
+      </div>
+      <div class="award-item">
+        <i class="fa-solid fa-award"></i>
+        <span>Hôtel 3 Étoiles<br>Classé Bénin</span>
+      </div>
+      <div class="award-item">
+        <i class="fa-solid fa-shield-halved" style="color:#1a9bd7;"></i>
+        <span>Paiement<br>100% Sécurisé</span>
+      </div>
+      <div class="award-item">
+        <i class="fa-solid fa-handshake"></i>
+        <span>Meilleur Tarif<br>Garanti Direct</span>
+      </div>
+      <div class="award-item">
+        <i class="fa-solid fa-leaf" style="color:var(--green);"></i>
+        <span>Établissement<br>Éco-Responsable</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CTA Banner ───────────────────────────────────────────────── -->
+<section id="cta-banner">
+  <div class="container">
+    <span class="section-label reveal" style="color:var(--gold-l);">Réservation Directe</span>
+    <h2 class="reveal">Meilleur Tarif Garanti<br>en Réservant Directement</h2>
+    <p class="reveal">Aucun frais de commission, tarifs préférentiels, annulation flexible et service personnalisé — uniquement lorsque vous réservez directement avec nous.</p>
+    <div class="cta-actions reveal">
+      <a href="contact.html" class="btn btn-primary"><i class="fa-regular fa-calendar-check"></i> Réserver Maintenant</a>
+      <a href="tel:+22997856500" class="btn btn-outline-white"><i class="fa-solid fa-phone"></i> +229 97 85 65 00</a>
+      <a href="https://wa.me/22997856500?text=Bonjour%2C%20je%20souhaite%20réserver%20une%20chambre." target="_blank" class="btn btn-outline-white"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+
+<script src="js/components.js"></script>
+<script>
+  initComponents('home');
+
+  // ── Hero slider ────────────────────────────────────────
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsEl = document.getElementById('heroDots');
+  let cur = 0, timer;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i+1));
+    d.onclick = () => goSlide(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goSlide(n) {
+    slides[cur].classList.remove('active');
+    document.querySelectorAll('.hero-dot')[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    document.querySelectorAll('.hero-dot')[cur].classList.add('active');
+  }
+  function moveSlide(dir) { clearInterval(timer); goSlide(cur + dir); startTimer(); }
+  function startTimer() { timer = setInterval(() => goSlide(cur + 1), 6000); }
+  startTimer();
+  document.getElementById('hero').addEventListener('mouseenter', () => clearInterval(timer));
+  document.getElementById('hero').addEventListener('mouseleave', startTimer);
+
+  // ── Booking bar dates ──────────────────────────────────
+  const fmt = d => d.toISOString().split('T')[0];
+  const t = new Date(), t2 = new Date(t), t3 = new Date(t);
+  t2.setDate(t.getDate()+1); t3.setDate(t.getDate()+3);
+  document.getElementById('checkin').value  = fmt(t2);
+  document.getElementById('checkout').value = fmt(t3);
+
+  // ── Occupancy picker ───────────────────────────────────
+  const occ = { rooms: 1, adults: 2, children: 0 };
+
+  function toggleOccupancy() {
+    const popup = document.getElementById('occPopup');
+    const btn   = document.getElementById('occBtn');
+    popup.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  function changeOcc(key, delta) {
+    const min = key === 'adults' ? 1 : 0;
+    occ[key] = Math.max(min, Math.min(10, occ[key] + delta));
+    document.getElementById(key + '-val').textContent = occ[key];
+    document.getElementById(key + '-minus').disabled = occ[key] <= min;
+    const parts = [];
+    parts.push(occ.adults + ' Adulte' + (occ.adults > 1 ? 's' : ''));
+    if (occ.children) parts.push(occ.children + ' Enfant' + (occ.children > 1 ? 's' : ''));
+    parts.push(occ.rooms + ' Chambre' + (occ.rooms > 1 ? 's' : ''));
+    document.getElementById('occLabel').textContent = parts.join(' · ');
+  }
+
+  // Close popup on outside click
+  document.addEventListener('click', e => {
+    const wrap = document.querySelector('.occupancy-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('occPopup').classList.remove('open');
+      document.getElementById('occBtn').classList.remove('open');
+    }
+  });
+
+  // Pass booking params to contact page
+  document.getElementById('bookingCta').addEventListener('click', function(e) {
+    const ci = document.getElementById('checkin').value;
+    const co = document.getElementById('checkout').value;
+    const rt = document.getElementById('roomType').value;
+    const promo = document.getElementById('promoCode').value;
+    const params = new URLSearchParams({ checkin: ci, checkout: co, adults: occ.adults, children: occ.children, rooms: occ.rooms });
+    if (rt) params.set('type', rt);
+    if (promo) params.set('promo', promo);
+    this.href = 'contact.html?' + params.toString();
+  });
+</script>
+</body>
+</html>

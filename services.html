@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services & Équipements — Hôtel Bariba Playa Cotonou</title>
+  <meta name="description" content="Découvrez tous les services de l'Hôtel Bariba Playa : spa, business center, navette aéroport, excursions, événements et bien plus à Cotonou, Bénin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .page-hero-bg { background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&q=85&auto=format'); }
+
+    /* Amenities full grid */
+    .amenities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .amenity-card { background: var(--white); border-radius: var(--radius); padding: 28px 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,.06); border: 1px solid var(--border); transition: var(--transition); }
+    .amenity-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .amenity-icon { width: 60px; height: 60px; background: var(--gold-pale); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem; color: var(--gold); transition: var(--transition); }
+    .amenity-card:hover .amenity-icon { background: linear-gradient(135deg, var(--gold), var(--gold-l)); color: var(--dark); }
+    .amenity-card h4 { font-family: 'Playfair Display', serif; font-size: .98rem; color: var(--navy); margin-bottom: 7px; }
+    .amenity-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+
+    /* Service spotlight */
+    .service-spotlight { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 80px; }
+    .service-spotlight:last-child { margin-bottom: 0; }
+    .service-spotlight.reverse { }
+    .service-spotlight.reverse .spot-img { order: 2; }
+    .service-spotlight.reverse .spot-body { order: 1; }
+    .spot-img { position: relative; min-height: 380px; overflow: hidden; }
+    .spot-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .spot-body { background: var(--cream); padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; }
+    .spot-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; color: rgba(201,149,42,.15); line-height: 1; margin-bottom: 8px; }
+    .spot-body h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .spot-body p { font-size: .92rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .spot-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .spot-list-item { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--dark); }
+    .spot-list-item i { color: var(--gold); font-size: .8rem; flex-shrink: 0; }
+
+    /* Excursions */
+    .excursions-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .excursion-card { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); }
+    .excursion-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .exc-img { height: 200px; overflow: hidden; position: relative; }
+    .exc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .excursion-card:hover .exc-img img { transform: scale(1.07); }
+    .exc-tag { position: absolute; top: 14px; left: 14px; background: var(--gold); color: var(--dark); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; }
+    .exc-body { background: var(--white); padding: 22px; }
+    .exc-body h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+    .exc-body p { font-size: .82rem; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .exc-meta { display: flex; align-items: center; gap: 14px; font-size: .78rem; color: var(--muted); }
+    .exc-meta i { color: var(--gold); }
+
+    /* Wellness */
+    .wellness-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
+    .wellness-list { display: flex; flex-direction: column; gap: 16px; }
+    .wellness-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px; background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); transition: var(--transition); }
+    .wellness-item:hover { border-color: var(--gold); transform: translateX(4px); }
+    .wellness-item .ico { width: 44px; height: 44px; background: var(--gold-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+    .wellness-item h5 { font-family: 'Playfair Display', serif; font-size: .98rem; color: var(--navy); margin-bottom: 3px; }
+    .wellness-item p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    @media (max-width:1024px) {
+      .amenities-grid { grid-template-columns: repeat(2,1fr); }
+      .excursions-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:768px) {
+      .service-spotlight { grid-template-columns: 1fr; }
+      .service-spotlight .spot-img { order: 1 !important; min-height: 240px; }
+      .service-spotlight .spot-body { order: 2 !important; padding: 28px 22px; }
+      .spot-body h3 { font-size: 1.4rem; }
+      .excursions-grid { grid-template-columns: 1fr; }
+      .wellness-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="current">Services</span>
+      </div>
+      <h1>Services &amp; <em>Équipements</em></h1>
+      <p>Tout le confort et les prestations haut de gamme pour un séjour parfait.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── All Amenities ────────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Inclus</span>
+      <h2 class="section-title reveal">Tous Nos <em>Équipements</em></h2>
+      <p class="section-subtitle reveal" style="max-width:520px; margin:14px auto 0;">Un ensemble complet de services pensés pour répondre aux besoins de chaque voyageur.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="amenities-grid" style="margin-top:48px;">
+      <div class="amenity-card reveal"><div class="amenity-icon"><i class="fa-solid fa-wifi"></i></div><h4>WiFi Haut Débit</h4><p>Connexion internet gratuite dans toutes les zones de l'hôtel</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.05s"><div class="amenity-icon"><i class="fa-solid fa-car"></i></div><h4>Parking Gratuit</h4><p>Stationnement privé sécurisé sur site, sans réservation</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.1s"><div class="amenity-icon"><i class="fa-solid fa-utensils"></i></div><h4>Restaurant &amp; Bar</h4><p>Ouvert tous les jours de 6h30 à 23h00</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.15s"><div class="amenity-icon"><i class="fa-solid fa-concierge-bell"></i></div><h4>Réception 24h/24</h4><p>Personnel disponible nuit et jour pour vous assister</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.2s"><div class="amenity-icon"><i class="fa-solid fa-shuttle-van"></i></div><h4>Navette Aéroport</h4><p>Transferts depuis/vers l'aéroport Cadjehoun sur demande</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.25s"><div class="amenity-icon"><i class="fa-solid fa-briefcase"></i></div><h4>Business Center</h4><p>Postes informatiques, imprimante, scanner disponibles</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.3s"><div class="amenity-icon"><i class="fa-solid fa-users"></i></div><h4>Salles de Réunion</h4><p>Espaces équipés pour séminaires jusqu'à 50 personnes</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.35s"><div class="amenity-icon"><i class="fa-solid fa-spa"></i></div><h4>Espace Massage</h4><p>Soins relaxants et massages sur rendez-vous</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.4s"><div class="amenity-icon"><i class="fa-solid fa-bicycle"></i></div><h4>Location de Vélos</h4><p>Explorez Fidjrossè et ses environs à deux roues</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.45s"><div class="amenity-icon"><i class="fa-solid fa-fire-burner"></i></div><h4>BBQ &amp; Terrasse</h4><p>Barbecue, feu de cheminée et coin pique-nique en plein air</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.5s"><div class="amenity-icon"><i class="fa-solid fa-music"></i></div><h4>Soirées Musicales</h4><p>Musique live les vendredis et samedis en saison</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.55s"><div class="amenity-icon"><i class="fa-solid fa-coins"></i></div><h4>Change de Devises</h4><p>Service de change disponible à la réception</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.6s"><div class="amenity-icon"><i class="fa-solid fa-shirt"></i></div><h4>Blanchisserie</h4><p>Service lavage, séchage et repassage express</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.65s"><div class="amenity-icon"><i class="fa-solid fa-map"></i></div><h4>Conciergerie</h4><p>Organisation de visites, réservations, billets d'avion</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.7s"><div class="amenity-icon"><i class="fa-solid fa-child"></i></div><h4>Espace Enfants</h4><p>Jeux et activités pour les plus jeunes</p></div>
+      <div class="amenity-card reveal" style="transition-delay:.75s"><div class="amenity-icon"><i class="fa-solid fa-shield-halved"></i></div><h4>Coffre-fort</h4><p>Disponible dans toutes les chambres</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Service Spotlights ───────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center" style="margin-bottom:64px;">
+      <span class="section-label reveal">En Détail</span>
+      <h2 class="section-title reveal">Services <em>Phares</em></h2>
+      <div class="divider divider-center reveal"></div>
+    </div>
+
+    <!-- Business -->
+    <div class="service-spotlight reveal">
+      <div class="spot-img">
+        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=900&q=80&auto=format" alt="Business Center" />
+      </div>
+      <div class="spot-body">
+        <div class="spot-num">01</div>
+        <h3>Business Center &amp; Séminaires</h3>
+        <p>L'Hôtel Bariba Playa est un partenaire idéal pour vos déplacements professionnels. Notre espace business entièrement équipé et nos salles de conférence modernes accueillent vos réunions dans les meilleures conditions.</p>
+        <div class="spot-list">
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Salle de conférence jusqu'à 50 personnes</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Vidéoprojecteur &amp; écran motorisé</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Système de sonorisation professionnel</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> WiFi dédié haut débit</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Service traiteur et pauses café inclus</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Secrétariat et reprographie sur place</div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Demander un Devis</a>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div class="service-spotlight reverse reveal">
+      <div class="spot-img">
+        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&auto=format" alt="Événements" />
+      </div>
+      <div class="spot-body">
+        <div class="spot-num">02</div>
+        <h3>Réceptions &amp; Événements Privés</h3>
+        <p>Célébrez les moments qui comptent dans un cadre inoubliable. De l'anniversaire intime au mariage grandiose, notre équipe événementielle prend en charge chaque détail pour que votre fête soit parfaite.</p>
+        <div class="spot-list">
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Mariages &amp; cérémonies (jusqu'à 150 personnes)</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Cocktails &amp; cocktails dinatoires</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Anniversaires &amp; baptêmes</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Décoration &amp; fleuriste sur mesure</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> DJ, musique live, animation</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Menu buffet ou service à table</div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Organiser mon Événement</a>
+      </div>
+    </div>
+
+    <!-- Transfer -->
+    <div class="service-spotlight reveal">
+      <div class="spot-img">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=80&auto=format" alt="Navette" />
+      </div>
+      <div class="spot-body">
+        <div class="spot-num">03</div>
+        <h3>Navette &amp; Services de Transport</h3>
+        <p>Votre confort commence dès la sortie de l'avion. Notre service de navette premium vous accueille à l'aéroport Cadjehoun et vous conduit directement à l'hôtel. Location de véhicules avec chauffeur également disponible.</p>
+        <div class="spot-list">
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Navette aéroport (6,4 km — ~17 min)</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Location voiture avec chauffeur</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Taxi conventionné 24h/24</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Location de vélos (gratuit pour les résidents)</div>
+          <div class="spot-list-item"><i class="fa-solid fa-check-circle"></i> Transferts inter-villes organisés</div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Réserver un Transfert</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Bien-être ─────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--sand);">
+  <div class="container">
+    <div class="wellness-grid">
+      <div class="reveal-left">
+        <span class="section-label">Bien-être</span>
+        <h2 class="section-title">Spa &amp; <em>Relaxation</em></h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Offrez-vous une pause bien méritée. Notre espace bien-être propose une gamme complète de soins du corps et de massages inspirés des traditions thérapeutiques d'Afrique de l'Ouest.</p>
+        <p class="section-subtitle" style="margin-top:12px;">Tous nos soins sont réalisés par des thérapeutes certifiés, avec des huiles naturelles et des produits locaux.</p>
+        <a href="contact.html" class="btn btn-dark" style="margin-top:28px;">Réserver un Soin</a>
+      </div>
+      <div class="wellness-list reveal-right">
+        <div class="wellness-item">
+          <div class="ico"><i class="fa-solid fa-hands"></i></div>
+          <div><h5>Massage Relaxant</h5><p>60 ou 90 min — Huiles essentielles africaines, pressions douces pour une détente totale</p></div>
+        </div>
+        <div class="wellness-item">
+          <div class="ico"><i class="fa-solid fa-leaf"></i></div>
+          <div><h5>Soin Aux Herbes Locales</h5><p>45 min — Cataplasme de plantes médicinales béninoises, tradition ancestrale de bien-être</p></div>
+        </div>
+        <div class="wellness-item">
+          <div class="ico"><i class="fa-solid fa-spa"></i></div>
+          <div><h5>Massage des Pieds Réflexologie</h5><p>45 min — Stimulation des points réflexes pour rééquilibrer le corps et l'esprit</p></div>
+        </div>
+        <div class="wellness-item">
+          <div class="ico"><i class="fa-solid fa-gem"></i></div>
+          <div><h5>Soins Visage Naturels</h5><p>60 min — Nettoyage, exfoliation et masque à base d'argile et d'huile de karité du Bénin</p></div>
+        </div>
+        <div class="wellness-item">
+          <div class="ico"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div><h5>Forfait Couple</h5><p>120 min — Deux massages simultanés, bain de fleurs et champagne offert</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Excursions ────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Tourisme</span>
+      <h2 class="section-title reveal">Excursions &amp; <em>Découvertes</em></h2>
+      <p class="section-subtitle reveal" style="max-width:520px; margin:14px auto 0;">Notre conciergerie organise pour vous les plus belles excursions au Bénin. Réservez à la réception.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+    <div class="excursions-grid" style="margin-top:48px;">
+      <div class="excursion-card reveal">
+        <div class="exc-img">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&q=80&auto=format" alt="Ganvié" />
+          <span class="exc-tag">Incontournable</span>
+        </div>
+        <div class="exc-body">
+          <h4>Ganvié — La Venise de l'Afrique</h4>
+          <p>Village lacustre unique au monde, entièrement construit sur le lac Nokoué. Une expérience culturelle et visuelle inoubliable en pirogue.</p>
+          <div class="exc-meta"><span><i class="fa-solid fa-clock"></i> Journée complète</span><span><i class="fa-solid fa-location-dot"></i> 45 km de Cotonou</span></div>
+        </div>
+      </div>
+      <div class="excursion-card reveal" style="transition-delay:.1s">
+        <div class="exc-img">
+          <img src="https://images.unsplash.com/photo-1609402197228-f19e4e79c0c1?w=700&q=80&auto=format" alt="Ouidah" />
+          <span class="exc-tag">Histoire</span>
+        </div>
+        <div class="exc-body">
+          <h4>Ouidah — Cité des Esclaves</h4>
+          <p>Ville historique chargée d'histoire, avec la Route des Esclaves, la forteresse portugaise et le temple des pythons sacrés.</p>
+          <div class="exc-meta"><span><i class="fa-solid fa-clock"></i> Demi-journée</span><span><i class="fa-solid fa-location-dot"></i> 40 km</span></div>
+        </div>
+      </div>
+      <div class="excursion-card reveal" style="transition-delay:.2s">
+        <div class="exc-img">
+          <img src="https://images.unsplash.com/photo-1564419320461-6870880221ad?w=700&q=80&auto=format" alt="Marché Dantokpa" />
+          <span class="exc-tag">Culturel</span>
+        </div>
+        <div class="exc-body">
+          <h4>Marché Dantokpa</h4>
+          <p>Le plus grand marché d'Afrique de l'Ouest. Artisanat, épices, textiles, vaudou... Une immersion totale dans la vie béninoise.</p>
+          <div class="exc-meta"><span><i class="fa-solid fa-clock"></i> 2-3 heures</span><span><i class="fa-solid fa-location-dot"></i> Cotonou centre</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────────────────────────── -->
+<section style="background:var(--navy); padding:80px 0; text-align:center;">
+  <div class="container">
+    <h2 class="reveal" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--white); margin-bottom:14px;">Besoin d'un Service Particulier ?</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.65); font-size:1rem; max-width:440px; margin:0 auto 32px; line-height:1.75;">Notre équipe est à votre disposition 24h/24 pour toute demande spéciale.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-concierge-bell"></i> Contacter la Conciergerie</a>
+      <a href="tel:+22997856500" class="btn btn-outline-white"><i class="fa-solid fa-phone"></i> Appeler Maintenant</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+<script src="js/components.js"></script>
+<script>initComponents('services');</script>
+</body>
+</html>

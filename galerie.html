@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerie Photos — Hôtel Bariba Playa Cotonou</title>
+  <meta name="description" content="Découvrez l'univers de l'Hôtel Bariba Playa en images — chambres, restaurant, piscine, plage et lagune à Cotonou, Bénin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .page-hero-bg { background-image: url('uploads/gallery/facade-hotel.png'); }
+
+    /* Filter bar */
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; justify-content: center; }
+    .filter-btn {
+      padding: 10px 26px; border-radius: 50px;
+      font-size: .84rem; font-weight: 600; cursor: pointer;
+      transition: var(--transition); border: 2px solid var(--border);
+      color: var(--muted); background: var(--white);
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    /* Masonry gallery */
+    .gallery-masonry { columns: 3; column-gap: 16px; }
+    .gallery-item {
+      break-inside: avoid; margin-bottom: 16px;
+      border-radius: var(--radius); overflow: hidden; position: relative; cursor: pointer;
+      transition: var(--transition);
+    }
+    .gallery-item img { width: 100%; display: block; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,31,46,.75) 0%, transparent 55%);
+      opacity: 0; transition: var(--transition);
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay .g-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); font-weight: 600; }
+    .gallery-overlay .g-cat { font-size: .72rem; color: var(--gold-l); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    .gallery-overlay .g-zoom { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: .85rem; }
+
+    /* hidden items for filtering */
+    .gallery-item.hidden { display: none; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.94); display: none;
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lb-img { max-width: 90vw; max-height: 85vh; border-radius: var(--radius); object-fit: contain; }
+    .lb-close { position: absolute; top: 20px; right: 24px; font-size: 2rem; color: rgba(255,255,255,.7); cursor: pointer; transition: color var(--transition); }
+    .lb-close:hover { color: var(--gold-l); }
+    .lb-prev, .lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      font-size: 1.8rem; color: rgba(255,255,255,.6); cursor: pointer;
+      transition: color var(--transition); padding: 16px;
+      background: rgba(255,255,255,.06); border-radius: 50%; border: none;
+    }
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    .lb-prev:hover, .lb-next:hover { color: var(--gold-l); background: rgba(255,255,255,.12); }
+    .lb-caption { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); text-align: center; }
+    .lb-caption .lb-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); }
+    .lb-caption .lb-counter { font-size: .78rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+
+    /* Stats bar */
+    .gallery-stats { display: flex; align-items: center; justify-content: center; gap: 48px; background: var(--navy); padding: 40px; border-radius: var(--radius); margin-bottom: 48px; flex-wrap: wrap; }
+    .gstat { text-align: center; }
+    .gstat .num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold-l); }
+    .gstat .lbl { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-top: 4px; }
+
+    @media (max-width: 900px)  { .gallery-masonry { columns: 2; } }
+    @media (max-width: 480px)  { .gallery-masonry { columns: 1; } }
+    @media (max-width: 768px)  { .lb-prev { left: 8px; } .lb-next { right: 8px; } }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="current">Galerie</span>
+      </div>
+      <h1>Notre <em>Galerie</em></h1>
+      <p>Laissez-vous transporter dans l'univers du Bariba Playa — élégance, nature et authenticité.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Stats ─────────────────────────────────────────────────────── -->
+<section style="background:var(--cream); padding:60px 0;">
+  <div class="container">
+    <div class="gallery-stats reveal">
+      <div class="gstat"><div class="num">15+</div><div class="lbl">Chambres &amp; Suites</div></div>
+      <div class="gstat"><div class="num">1</div><div class="lbl">Restaurant</div></div>
+      <div class="gstat"><div class="num">13min</div><div class="lbl">de la Plage</div></div>
+      <div class="gstat"><div class="num">∞</div><div class="lbl">Souvenirs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Gallery ──────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label reveal">Galerie Photos</span>
+      <h2 class="section-title reveal">Découvrez Notre <em>Univers</em></h2>
+      <p class="section-subtitle reveal" style="max-width:500px; margin:14px auto 0;">Cliquez sur une photo pour l'agrandir. Naviguez entre les catégories pour explorer chaque espace.</p>
+      <div class="divider divider-center reveal"></div>
+    </div>
+
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" onclick="filterGallery('all', this)">Tout</button>
+      <button class="filter-btn" onclick="filterGallery('hotel', this)">Hôtel</button>
+      <button class="filter-btn" onclick="filterGallery('chambres', this)">Chambres</button>
+      <button class="filter-btn" onclick="filterGallery('restaurant', this)">Restaurant</button>
+      <button class="filter-btn" onclick="filterGallery('plage', this)">Plage &amp; Lagune</button>
+      <button class="filter-btn" onclick="filterGallery('services', this)">Services</button>
+    </div>
+
+    <!-- Photos loaded dynamically from database -->
+    <div class="gallery-masonry" id="gallery">
+      <div class="empty-state" id="galleryLoading" style="column-span:all;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size:2rem; color:var(--gold); opacity:1;"></i>
+        <p style="margin-top:12px;">Chargement des photos...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Lightbox ──────────────────────────────────────────────────── -->
+<div class="lightbox" id="lightbox">
+  <span class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></span>
+  <button class="lb-prev" onclick="changeLb(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <img class="lb-img" id="lbImg" src="" alt="" />
+  <button class="lb-next" onclick="changeLb(1)"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="lb-caption">
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+</div>
+
+<!-- ─── CTA ──────────────────────────────────────────────────────── -->
+<section style="background:var(--cream); padding:80px 0; text-align:center;">
+  <div class="container">
+    <h2 class="reveal" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--navy); margin-bottom:14px;">Vivez l'Expérience en Personne</h2>
+    <p class="reveal" style="color:var(--muted); font-size:1rem; max-width:420px; margin:0 auto 32px; line-height:1.75;">Les photos ne rendent que partiellement justice à la beauté de notre établissement.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary"><i class="fa-regular fa-calendar-check"></i> Réserver Maintenant</a>
+      <a href="chambres.html" class="btn btn-outline-dark">Voir les Chambres</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="floating-placeholder"></div>
+<script src="js/components.js"></script>
+<script>
+  initComponents('galerie');
+
+  let galleryData = [];   // populated from API
+  let currentIdx = 0;
+  let activeFilter = 'all';
+
+  // ── Build a single gallery card ────────────────────────────────────
+  function buildCard(photo, idx) {
+    const catLabels = { hotel: 'Hôtel', chambres: 'Chambres', restaurant: 'Restaurant', plage: 'Plage & Lagune', services: 'Services' };
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.dataset.cat = photo.category;
+    item.onclick = () => openLightbox(idx);
+    item.innerHTML = `
+      <img src="uploads/gallery/${photo.filename}" alt="${photo.title}" loading="lazy" />
+      <div class="gallery-overlay">
+        <span class="g-cat">${catLabels[photo.category] || photo.category}</span>
+        <span class="g-title">${photo.title}</span>
+        <span class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+      </div>`;
+    return item;
+  }
+
+  // ── Load photos from API ───────────────────────────────────────────
+  async function loadGallery() {
+    const grid = document.getElementById('gallery');
+    try {
+      const res = await fetch('api/gallery.php');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+      const photos = json.data || [];
+
+      grid.innerHTML = '';
+
+      if (photos.length === 0) {
+        grid.innerHTML = '<div class="empty-state" style="column-span:all;"><i class="fa-regular fa-image" style="font-size:2.5rem;color:var(--gold);opacity:.5;"></i><p style="margin-top:12px;color:var(--muted);">Aucune photo disponible.</p></div>';
+        return;
+      }
+
+      galleryData = photos;
+      photos.forEach((photo, idx) => {
+        grid.appendChild(buildCard(photo, idx));
+      });
+
+
+      // Re-apply active filter
+      applyFilter(activeFilter);
+    } catch (err) {
+      console.error('Gallery load error:', err);
+      grid.innerHTML = '<div class="empty-state" style="column-span:all;"><i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#c0392b;"></i><p style="margin-top:12px;color:var(--muted);">Impossible de charger les photos.</p></div>';
+    }
+  }
+
+  // ── Filter ─────────────────────────────────────────────────────────
+  function applyFilter(cat) {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
+    });
+  }
+
+  function filterGallery(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilter(cat);
+  }
+
+  // ── Lightbox ───────────────────────────────────────────────────────
+  function openLightbox(idx) {
+    currentIdx = idx;
+    updateLb();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function changeLb(dir) {
+    currentIdx = (currentIdx + dir + galleryData.length) % galleryData.length;
+    updateLb();
+  }
+  function updateLb() {
+    const d = galleryData[currentIdx];
+    document.getElementById('lbImg').src = 'uploads/gallery/' + d.filename;
+    document.getElementById('lbImg').alt = d.title;
+    document.getElementById('lbTitle').textContent = d.title;
+    document.getElementById('lbCounter').textContent = (currentIdx + 1) + ' / ' + galleryData.length;
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') changeLb(1);
+    if (e.key === 'ArrowLeft') changeLb(-1);
+  });
+
+  // Kick off
+  loadGallery();
+</script>
+</body>
+</html>
